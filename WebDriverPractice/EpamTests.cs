@@ -78,7 +78,6 @@ namespace WebDriverPractice
 					.Click()
 					.Perform();
 
-
 				var findButton = wait.Until(driver => driver.FindElement(By.XPath("//form/child::button")));
 
 				actions
@@ -100,7 +99,6 @@ namespace WebDriverPractice
 					.Click(sortByDate)
 					.Perform();
 
-
 				actions
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click(latestViewAndApplyButton)
@@ -118,7 +116,6 @@ namespace WebDriverPractice
 			{
 				Console.WriteLine(ex.Message);
 			}
-
 
 			Assert.IsTrue(answer);
 		}
@@ -158,6 +155,7 @@ namespace WebDriverPractice
 				var input = wait.Until(driver => driver.FindElement(By.XPath("//input[@name='q']")));
 
 				actions
+					.Click(input)
 					.Pause(TimeSpan.FromSeconds(1))
 					.SendKeys(keys)
 					.Perform();
@@ -173,13 +171,11 @@ namespace WebDriverPractice
 				wait.Until(driver => searchResultsContainer.All(element => element.Displayed));
 
 				answer = searchResultsContainer.All(item => item.Text.Contains(keys));
-
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
 			}
-
 
 			Assert.IsTrue(answer);
 		}
@@ -190,6 +186,4 @@ namespace WebDriverPractice
 			driver.Quit();
 		}
 	}
-
-
 }
