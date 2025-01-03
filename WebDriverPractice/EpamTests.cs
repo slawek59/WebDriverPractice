@@ -23,7 +23,7 @@ namespace WebDriverPractice
 		[DataRow("JavaScript")]
 		public void CareerSearch_ProvideKeyword_GetProperResult(string testData)
 		{
-			bool answer = false;
+			bool isSearchResultDisplayed;
 
 			try
 			{
@@ -107,17 +107,17 @@ namespace WebDriverPractice
 				var finalContent = wait.Until(driver => driver.FindElement(By.XPath("//div[@class='section__wrapper']")));
 				wait.Until(driver => finalContent.Displayed);
 
-				answer = finalContent.Text.Contains($"{testData}", StringComparison.OrdinalIgnoreCase);
+				isSearchResultDisplayed = finalContent.Text.Contains($"{testData}", StringComparison.OrdinalIgnoreCase);
 
-				Console.WriteLine(answer);
+				Console.WriteLine(isSearchResultDisplayed);
 
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+				throw new Exception("An error occurred during the CareerSearch_ProvideKeyword_GetProperResult", ex);
 			}
 
-			Assert.IsTrue(answer);
+			Assert.IsTrue(isSearchResultDisplayed);
 		}
 
 		[TestMethod]
@@ -126,7 +126,7 @@ namespace WebDriverPractice
 		[DataRow("automation")]
 		public void GlobalSearch_ProvideInput_GetProperResult(string keys)
 		{
-			bool answer = false;
+			bool doAllLinksContainKeyword;
 
 			try
 			{
@@ -170,14 +170,14 @@ namespace WebDriverPractice
 				IList<IWebElement> searchResultsContainer = wait.Until(driver => driver.FindElements(By.XPath("//div[@class='search-results__items']//a")));
 				wait.Until(driver => searchResultsContainer.All(element => element.Displayed));
 
-				answer = searchResultsContainer.All(item => item.Text.Contains(keys));
+				doAllLinksContainKeyword = searchResultsContainer.All(item => item.Text.Contains(keys));
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+				throw new Exception("An error occurred during the GlobalSearch_ProvideInput_GetProperResult", ex);
 			}
 
-			Assert.IsTrue(answer);
+			Assert.IsTrue(doAllLinksContainKeyword);
 		}
 
 		[TestCleanup]
