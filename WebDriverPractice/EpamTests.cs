@@ -42,18 +42,13 @@ namespace WebDriverPractice
 
 			try
 			{
+				_epamMainPage.ClickCookieAcceptButton();
+				_epamMainPage.ClickCareersButton();
+
+
 				
 
-
-				var cookie = _wait.Until(driver => driver.FindElement(By.Id("onetrust-accept-btn-handler")));
-
-				_actions
-					.Pause(TimeSpan.FromSeconds(1))
-					.Click(cookie)
-					.Perform();
-
-				var careersButton = _wait.Until(driver => driver.FindElement(By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/careers']")));
-				careersButton.Click();
+				
 
 				var remoteOption = _wait.Until(driver => driver.FindElement(By.XPath("//input[@name='remote']")));
 
