@@ -19,11 +19,29 @@ namespace WebDriverPractice
 
 		public void Click(By locator)
 		{
-			var webElement = _wait.Until(driver => _driver.FindElement(locator));
+			var webElement = _wait.Until(driver =>
+			{
+				var element = _driver.FindElement(locator);
+				return element.Displayed && element.Enabled ? element : null;
+			});
 
 			_actions
 				.MoveToElement(webElement)
 				.Click()
+				.Perform();
+		}
+
+		public void SendKeys(By locator, string keys)
+		{
+			var webElement = _wait.Until(driver =>
+			{
+				var element = _driver.FindElement(locator);
+				return element.Displayed && element.Enabled ? element : null;
+			});
+
+			_actions
+				.MoveToElement(webElement)
+				.SendKeys(keys)
 				.Perform();
 		}
 	}
