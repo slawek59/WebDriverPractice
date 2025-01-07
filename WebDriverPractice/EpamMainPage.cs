@@ -17,33 +17,27 @@ namespace WebDriverPractice
 		private readonly IWebDriver _driver;
 		private readonly WebDriverWait _wait;
 		private readonly Actions _actions;
+		private readonly WebDriverHelper _driverHelper;
 
 		private readonly By _cookieAcceptButton = By.Id("onetrust-accept-btn-handler");
 
 		private readonly By _careersButton = By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/careers']");
 
-		public EpamMainPage(IWebDriver driver, WebDriverWait wait, Actions actions)
+		public EpamMainPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
         {
 			_driver = driver;
 			_wait = wait;
 			_actions = actions;
+			_driverHelper = driverHelper;
 		}
 
 		public void MaximizeWindow() => _driver.Manage().Window.Maximize();
 		public void OpenPage() => _driver.Navigate().GoToUrl(BaseURL);
 
-		public void ClickCookieAcceptButton()=> Click(_cookieAcceptButton);
-		public void ClickCareersButton() => Click(_careersButton);
+		public void ClickCookieAcceptButton()=> _driverHelper.Click(_cookieAcceptButton);
+		public void ClickCareersButton() => _driverHelper.Click(_careersButton);
 
-		public void Click(By locator)
-		{
-			var webElement = _wait.Until(driver => driver.FindElement(locator));
-
-			_actions
-				.MoveToElement(webElement)
-				.Click()
-				.Perform();
-		}
+		
 
 	}
 }

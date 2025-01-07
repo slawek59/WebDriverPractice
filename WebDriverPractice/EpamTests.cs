@@ -13,6 +13,7 @@ namespace WebDriverPractice
 		private WebDriverWait _wait;
 		private EpamMainPage _epamMainPage;
 		private Actions _actions;
+		private WebDriverHelper _driverHelper;
 
 		[TestInitialize]
 		public void Setup()
@@ -26,7 +27,8 @@ namespace WebDriverPractice
 			};
 
 			_actions = new Actions(_driver);
-			_epamMainPage = new EpamMainPage(_driver, _wait, _actions);
+			_driverHelper = new WebDriverHelper(_driver, _wait, _actions);
+			_epamMainPage = new EpamMainPage(_driver, _wait, _actions, _driverHelper);
 			_epamMainPage.MaximizeWindow();
 			_epamMainPage.OpenPage();
 
