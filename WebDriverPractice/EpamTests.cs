@@ -12,6 +12,7 @@ namespace WebDriverPractice
 		private IWebDriver _driver;
 		private WebDriverWait _wait;
 		private EpamMainPage _epamMainPage;
+		private Actions _actions;
 
 		[TestInitialize]
 		public void Setup()
@@ -24,7 +25,8 @@ namespace WebDriverPractice
 				Message = "Element not found."
 			};
 
-			_epamMainPage = new EpamMainPage(_driver, _wait);
+			_actions = new Actions(_driver);
+			_epamMainPage = new EpamMainPage(_driver, _wait, _actions);
 			_epamMainPage.MaximizeWindow();
 			_epamMainPage.OpenPage();
 
@@ -42,11 +44,10 @@ namespace WebDriverPractice
 			{
 				
 
-				var actions = new Actions(_driver);
 
 				var cookie = _wait.Until(driver => driver.FindElement(By.Id("onetrust-accept-btn-handler")));
 
-				actions
+				_actions
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click(cookie)
 					.Perform();
@@ -56,7 +57,7 @@ namespace WebDriverPractice
 
 				var remoteOption = _wait.Until(driver => driver.FindElement(By.XPath("//input[@name='remote']")));
 
-				actions
+				_actions
 					.MoveToElement(remoteOption)
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click()
@@ -64,7 +65,7 @@ namespace WebDriverPractice
 
 				var keywordsInputField = _wait.Until(driver => driver.FindElement(By.Id("new_form_job_search-keyword")));
 
-				actions
+				_actions
 					.MoveToElement(keywordsInputField)
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click()
@@ -73,7 +74,7 @@ namespace WebDriverPractice
 
 				var locationsDropdown = _wait.Until(driver => driver.FindElement(By.CssSelector("span.select2-selection__rendered")));
 
-				actions
+				_actions
 					.MoveToElement(locationsDropdown)
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click()
@@ -81,7 +82,7 @@ namespace WebDriverPractice
 
 				var allLocationsOption = _wait.Until(driver => driver.FindElement(By.XPath("//li[contains(text(),'All Locations')]")));
 
-				actions
+				_actions
 					.MoveToElement(allLocationsOption)
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click()
@@ -89,7 +90,7 @@ namespace WebDriverPractice
 
 				var findButton = _wait.Until(driver => driver.FindElement(By.XPath("//form/child::button")));
 
-				actions
+				_actions
 					.MoveToElement(findButton)
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click()
@@ -100,15 +101,15 @@ namespace WebDriverPractice
 				var sortByDate = _wait.Until(driver => driver.FindElement(By.XPath("//input[@name='sort']/following-sibling::label[text()='Date']")));
 				_wait.Until(driver => sortByDate.Enabled);
 
-				actions
+				_actions
 					.MoveToElement(latestViewAndApplyButton);
 
-				actions
+				_actions
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click(sortByDate)
 					.Perform();
 
-				actions
+				_actions
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click(latestViewAndApplyButton)
 					.Perform();
