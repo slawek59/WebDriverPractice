@@ -9,14 +9,19 @@ namespace WebDriverPractice
 	[TestClass]
 	public class EpamTests
 	{
-		IWebDriver driver;
+		private IWebDriver _driver;
+		private EpamMainPage _epamMainPage;
 
 		[TestInitialize]
 		public void Setup()
 		{
-			driver = new ChromeDriver();
-			driver.Manage().Window.Maximize();
-			driver.Url = "https://www.epam.com";
+			_driver = new ChromeDriver();
+			_epamMainPage = new EpamMainPage(_driver);
+			_epamMainPage.MaximizeWindow();
+			_epamMainPage.OpenPage();
+
+			//_driver.Manage().Window.Maximize();
+			//_driver.Url = "https://www.epam.com";
 		}
 
 		[TestMethod]
@@ -27,13 +32,13 @@ namespace WebDriverPractice
 
 			try
 			{
-				var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+				var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
 				{
 					PollingInterval = TimeSpan.FromSeconds(0.25),
 					Message = "Element not found."
 				};
 
-				var actions = new Actions(driver);
+				var actions = new Actions(_driver);
 
 				var cookie = wait.Until(driver => driver.FindElement(By.Id("onetrust-accept-btn-handler")));
 
@@ -130,13 +135,13 @@ namespace WebDriverPractice
 
 			try
 			{
-				var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+				var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
 				{
 					PollingInterval = TimeSpan.FromSeconds(0.25),
 					Message = "Element not found."
 				};
 
-				var actions = new Actions(driver);
+				var actions = new Actions(_driver);
 
 				var cookie = wait.Until(driver => driver.FindElement(By.Id("onetrust-accept-btn-handler")));
 
@@ -183,7 +188,7 @@ namespace WebDriverPractice
 		[TestCleanup]
 		public void Cleanup()
 		{
-			driver.Quit();
+			_driver.Quit();
 		}
 	}
 }
