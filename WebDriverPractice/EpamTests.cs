@@ -24,7 +24,7 @@ namespace WebDriverPractice
 				Message = "Element not found."
 			};
 
-			_epamMainPage = new EpamMainPage(_driver);
+			_epamMainPage = new EpamMainPage(_driver, _wait);
 			_epamMainPage.MaximizeWindow();
 			_epamMainPage.OpenPage();
 
