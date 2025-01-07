@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace WebDriverPractice
 	public class CarrerSearchResultsPage
 	{
 		private readonly IWebDriver _driver;
+		private readonly WebDriverWait _wait;
 
-		public CarrerSearchResultsPage(IWebDriver driver)
+		public CarrerSearchResultsPage(IWebDriver driver, WebDriverWait wait)
         {
 			_driver = driver;
+			_wait = wait;
 		}
     }
 }

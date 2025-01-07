@@ -10,12 +10,20 @@ namespace WebDriverPractice
 	public class EpamTests
 	{
 		private IWebDriver _driver;
+		private WebDriverWait _wait;
 		private EpamMainPage _epamMainPage;
 
 		[TestInitialize]
 		public void Setup()
 		{
 			_driver = new ChromeDriver();
+
+			_wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
+			{
+				PollingInterval = TimeSpan.FromSeconds(0.25),
+				Message = "Element not found."
+			};
+
 			_epamMainPage = new EpamMainPage(_driver);
 			_epamMainPage.MaximizeWindow();
 			_epamMainPage.OpenPage();
@@ -32,25 +40,21 @@ namespace WebDriverPractice
 
 			try
 			{
-				var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-				{
-					PollingInterval = TimeSpan.FromSeconds(0.25),
-					Message = "Element not found."
-				};
+				
 
 				var actions = new Actions(_driver);
 
-				var cookie = wait.Until(driver => driver.FindElement(By.Id("onetrust-accept-btn-handler")));
+				var cookie = _wait.Until(driver => driver.FindElement(By.Id("onetrust-accept-btn-handler")));
 
 				actions
 					.Pause(TimeSpan.FromSeconds(1))
 					.Click(cookie)
 					.Perform();
 
-				var careersButton = wait.Until(driver => driver.FindElement(By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/careers']")));
+				var careersButton = _wait.Until(driver => driver.FindElement(By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/careers']")));
 				careersButton.Click();
 
-				var remoteOption = wait.Until(driver => driver.FindElement(By.XPath("//input[@name='remote']")));
+				var remoteOption = _wait.Until(driver => driver.FindElement(By.XPath("//input[@name='remote']")));
 
 				actions
 					.MoveToElement(remoteOption)
@@ -58,7 +62,7 @@ namespace WebDriverPractice
 					.Click()
 					.Perform();
 
-				var keywordsInputField = wait.Until(driver => driver.FindElement(By.Id("new_form_job_search-keyword")));
+				var keywordsInputField = _wait.Until(driver => driver.FindElement(By.Id("new_form_job_search-keyword")));
 
 				actions
 					.MoveToElement(keywordsInputField)
@@ -67,7 +71,7 @@ namespace WebDriverPractice
 					.SendKeys(testData)
 					.Perform();
 
-				var locationsDropdown = wait.Until(driver => driver.FindElement(By.CssSelector("span.select2-selection__rendered")));
+				var locationsDropdown = _wait.Until(driver => driver.FindElement(By.CssSelector("span.select2-selection__rendered")));
 
 				actions
 					.MoveToElement(locationsDropdown)
@@ -75,7 +79,7 @@ namespace WebDriverPractice
 					.Click()
 					.Perform();
 
-				var allLocationsOption = wait.Until(driver => driver.FindElement(By.XPath("//li[contains(text(),'All Locations')]")));
+				var allLocationsOption = _wait.Until(driver => driver.FindElement(By.XPath("//li[contains(text(),'All Locations')]")));
 
 				actions
 					.MoveToElement(allLocationsOption)
@@ -83,7 +87,7 @@ namespace WebDriverPractice
 					.Click()
 					.Perform();
 
-				var findButton = wait.Until(driver => driver.FindElement(By.XPath("//form/child::button")));
+				var findButton = _wait.Until(driver => driver.FindElement(By.XPath("//form/child::button")));
 
 				actions
 					.MoveToElement(findButton)
@@ -91,10 +95,10 @@ namespace WebDriverPractice
 					.Click()
 					.Perform();
 
-				var latestViewAndApplyButton = wait.Until(driver => driver.FindElement(By.XPath("//ul[@class='search-result__list']/li[1]//a[contains(text(), 'View and apply')]")));
+				var latestViewAndApplyButton = _wait.Until(driver => driver.FindElement(By.XPath("//ul[@class='search-result__list']/li[1]//a[contains(text(), 'View and apply')]")));
 
-				var sortByDate = wait.Until(driver => driver.FindElement(By.XPath("//input[@name='sort']/following-sibling::label[text()='Date']")));
-				wait.Until(driver => sortByDate.Enabled);
+				var sortByDate = _wait.Until(driver => driver.FindElement(By.XPath("//input[@name='sort']/following-sibling::label[text()='Date']")));
+				_wait.Until(driver => sortByDate.Enabled);
 
 				actions
 					.MoveToElement(latestViewAndApplyButton);
@@ -109,8 +113,8 @@ namespace WebDriverPractice
 					.Click(latestViewAndApplyButton)
 					.Perform();
 				
-				var finalContent = wait.Until(driver => driver.FindElement(By.XPath("//div[@class='section__wrapper']")));
-				wait.Until(driver => finalContent.Displayed);
+				var finalContent = _wait.Until(driver => driver.FindElement(By.XPath("//div[@class='section__wrapper']")));
+				_wait.Until(driver => finalContent.Displayed);
 
 				isSearchResultDisplayed = finalContent.Text.Contains($"{testData}", StringComparison.OrdinalIgnoreCase);
 

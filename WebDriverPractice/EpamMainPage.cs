@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,11 +13,12 @@ namespace WebDriverPractice
 	{
 		private const string BaseURL = "https://www.epam.com";
 		private readonly IWebDriver _driver;
+		private readonly WebDriverWait _wait;
 
-
-		public EpamMainPage(IWebDriver driver)
+		public EpamMainPage(IWebDriver driver, WebDriverWait wait)
         {
 			_driver = driver;
+			_wait = wait;
 		}
 
 		public void MaximizeWindow() => _driver.Manage().Window.Maximize();
