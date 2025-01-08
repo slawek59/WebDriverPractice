@@ -46,7 +46,8 @@ namespace WebDriverPractice.Pages
             _driverHelper.Click(_allLocationsOption);
             _driverHelper.Click(_findButton);
 
-            _actions.ScrollToElement(_driverHelper.FindTheElement(_sortLegend)).Perform();
+            _driverHelper.ScrollToElement(_sortLegend);
+            
             //_actions.MoveToElement(_driverHelper.FindTheElement(_sortByDate)).Click().Perform();
             var date = _driverHelper.FindTheElement(_sortByDate);
 

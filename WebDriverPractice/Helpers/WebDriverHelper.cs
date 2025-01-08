@@ -62,5 +62,10 @@ namespace WebDriverPractice.Helpers
 
             return webElement;
         }
-    }
+
+        public void ScrollToElement(By locator) => _actions
+            .ScrollToElement(FindTheElement(locator))
+            .Perform();
+
+	}
 }
