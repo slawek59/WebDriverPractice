@@ -24,7 +24,7 @@ namespace WebDriverPractice
 		private readonly By _careersButton = By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/careers']");
 
 		public EpamMainPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
-        {
+		{
 			_driver = driver;
 			_wait = wait;
 			_actions = actions;
@@ -34,10 +34,8 @@ namespace WebDriverPractice
 		public void MaximizeWindow() => _driver.Manage().Window.Maximize();
 		public void OpenPage() => _driver.Navigate().GoToUrl(BaseURL);
 
-		public void ClickCookieAcceptButton()=> _driverHelper.Click(_cookieAcceptButton);
-		public void ClickCareersButton() => _driverHelper.Click(_careersButton);
-
+		public void ClickCookieAcceptButton() => _driverHelper.Click(_cookieAcceptButton);
 		
-
+		public void ClickCareersButton() => _driverHelper.Click(_careersButton);
 	}
 }
