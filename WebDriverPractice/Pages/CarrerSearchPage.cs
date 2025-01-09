@@ -51,8 +51,8 @@ namespace WebDriverPractice.Pages
             //_actions.MoveToElement(_driverHelper.FindTheElement(_sortByDate)).Click().Perform();
             var date = _driverHelper.FindElementWithWait(_sortByDate);
 
-            ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", date);
-
+            //((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", date);
+            _driverHelper.ClickWithJS(date);
 
             _driverHelper.Click(_latestViewAndApplyButton);
 

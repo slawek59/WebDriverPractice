@@ -82,6 +82,19 @@ namespace WebDriverPractice.Tests
 			Assert.IsTrue(doAllLinksContainKeyword);
 		}
 
+		[TestMethod]
+		public void AboutPage_ClickDownload_Downloads()
+		{
+			_epamMainPage.ClickCookieAcceptButton();
+			_epamMainPage.ClickAboutButton();
+
+			var aboutPage = new AboutPage(_driver, _wait, _actions, _driverHelper);
+
+			aboutPage.Download();
+
+			Thread.Sleep(10000);
+		}
+
 		[TestCleanup]
 		public void Cleanup()
 		{
