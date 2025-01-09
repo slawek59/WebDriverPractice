@@ -46,12 +46,13 @@ namespace WebDriverPractice.Helpers
             _actions
                 .MoveToElement(webElement)
                 .Pause(TimeSpan.FromSeconds(1))
-                .Click()
+                .Click(webElement)
                 .SendKeys(keys)
-                .Perform();
+				.Pause(TimeSpan.FromSeconds(1))
+				.Perform();
         }
 
-        public IWebElement FindTheElement(By locator)
+        public IWebElement FindElementWithWait(By locator)
         {
             //var webElement = _wait.Until(driver =>
             //{
@@ -63,8 +64,20 @@ namespace WebDriverPractice.Helpers
             return webElement;
         }
 
-        public void ScrollToElement(By locator) => _actions
-            .ScrollToElement(FindTheElement(locator))
+		public IList<IWebElement> FindElementsWithWait(By locator)
+		{
+			//var webElement = _wait.Until(driver =>
+			//{
+			//	var element = _driver.FindElement(locator);
+			//	return element.Displayed && element.Enabled ? element : null;
+			//});
+			var webElements = _wait.Until(driver => _driver.FindElements(locator));
+
+			return webElements;
+		}
+
+		public void ScrollToElement(By locator) => _actions
+            .ScrollToElement(FindElementWithWait(locator))
             .Perform();
 
 	}

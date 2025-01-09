@@ -49,14 +49,14 @@ namespace WebDriverPractice.Pages
             _driverHelper.ScrollToElement(_sortLegend);
             
             //_actions.MoveToElement(_driverHelper.FindTheElement(_sortByDate)).Click().Perform();
-            var date = _driverHelper.FindTheElement(_sortByDate);
+            var date = _driverHelper.FindElementWithWait(_sortByDate);
 
             ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", date);
 
 
             _driverHelper.Click(_latestViewAndApplyButton);
 
-            return _driverHelper.FindTheElement(_finalContent).Text.Contains($"{keys}", StringComparison.OrdinalIgnoreCase);
+            return _driverHelper.FindElementWithWait(_finalContent).Text.Contains($"{keys}", StringComparison.OrdinalIgnoreCase);
         }
 
         //public void ClickRemoteOptionCheckbox() => _driverHelper.Click(_remoteOptionCheckbox);
