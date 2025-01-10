@@ -20,7 +20,14 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			_driver = new ChromeDriver();
+			///TODO - download setup
+			var chromeOptions = new ChromeOptions();
+			chromeOptions.AddUserProfilePreference("download.default_directory", @"C:\Users\wassl\Downloads\");
+			chromeOptions.AddUserProfilePreference("download.prompt_for_download", false);
+			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
+			///TODO - end of download setup
+			///
+			_driver = new ChromeDriver(@"C:\chromedriver", chromeOptions);
 
 			_wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
 			{
@@ -78,12 +85,13 @@ namespace WebDriverPractice.Tests
 			var searchResultPage = new SearchResultPage(_driver, _wait, _actions, _driverHelper);
 
 			doAllLinksContainKeyword = searchResultPage.DoAllLinksContainKeyword(keyword);
-
+			///TODO really all links? you mean <a> ?!?!
 			Assert.IsTrue(doAllLinksContainKeyword);
 		}
 
 		[TestMethod]
-		public void AboutPage_ClickDownload_Downloads()
+		[DataRow("C:\\Users\\wassl\\Downloads\\EPAM_Corporate_Overview_Q4_EOY.pdf")]
+		public void AboutPage_ClickDownload_Downloads(string filePath)
 		{
 			_epamMainPage.ClickCookieAcceptButton();
 			_epamMainPage.ClickAboutButton();
@@ -92,7 +100,20 @@ namespace WebDriverPractice.Tests
 
 			aboutPage.Download();
 
-			Thread.Sleep(10000);
+			Thread.Sleep(10000); ///TODO - out z tym
+
+			//var filePath = Path.Combine(@"C:\Users\wassl\Downloads\", fileName); 
+
+			var doesFileExist = File.Exists(filePath);
+
+			var canFileBeDeleted = doesFileExist;
+
+			if (canFileBeDeleted)
+			{
+				File.Delete(filePath);
+			}
+
+			Assert.IsTrue(doesFileExist);
 		}
 
 		[TestCleanup]
