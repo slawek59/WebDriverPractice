@@ -27,6 +27,7 @@ namespace WebDriverPractice.Pages
 		private readonly By _inputField = By.XPath("//input[@name='q']");
 		private readonly By _findButton = By.XPath("//span[contains(text(), 'Find')]/parent::*");
 		private readonly By _aboutButton = By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/about']");
+		private readonly By _insightsButton = By.LinkText("Insights");
 
 		public EpamMainPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
 		{
@@ -40,15 +41,14 @@ namespace WebDriverPractice.Pages
 		public void OpenPage() => _driver.Navigate().GoToUrl(BaseURL);
 		public void SearchForKeyword(string keyword)
 		{
-			ClickCookieAcceptButton();
 			_driverHelper.Click(_magnifierButton);
 			_driverHelper.SendKeys(_inputField, keyword);
 			_driverHelper.Click(_findButton);
 		}
 
 		public void ClickCookieAcceptButton() => _driverHelper.Click(_cookieAcceptButton);
-
 		public void ClickCareersButton() => _driverHelper.Click(_careersButton);
 		public void ClickAboutButton () => _driverHelper.Click(_aboutButton);
+		public void ClickInsightsButton() => _driverHelper.Click(_insightsButton);
 	}
 }

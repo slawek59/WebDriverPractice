@@ -40,6 +40,7 @@ namespace WebDriverPractice.Tests
 			_epamMainPage = new EpamMainPage(_driver, _wait, _actions, _driverHelper);
 			_epamMainPage.MaximizeWindow();
 			_epamMainPage.OpenPage();
+			_epamMainPage.ClickCookieAcceptButton();
 
 			//_driver.Manage().Window.Maximize();
 			//_driver.Url = "https://www.epam.com";
@@ -50,7 +51,6 @@ namespace WebDriverPractice.Tests
 		public void CareerSearch_ProvideKeyword_GetProperResult(string testData)
 		{
 			bool isSearchResultDisplayed = false;
-			_epamMainPage.ClickCookieAcceptButton();
 
 			_epamMainPage.ClickCareersButton();
 
@@ -93,7 +93,6 @@ namespace WebDriverPractice.Tests
 		[DataRow("C:\\Users\\wassl\\Downloads\\EPAM_Corporate_Overview_Q4_EOY.pdf")]
 		public void AboutPage_ClickDownload_Downloads(string filePath)
 		{
-			_epamMainPage.ClickCookieAcceptButton();
 			_epamMainPage.ClickAboutButton();
 
 			var aboutPage = new AboutPage(_driver, _wait, _actions, _driverHelper);
@@ -114,6 +113,28 @@ namespace WebDriverPractice.Tests
 			}
 
 			Assert.IsTrue(doesFileExist);
+		}
+
+		[TestMethod]
+		public void InsightsPage_ClickReadMoreButtonOnThirdSlide_ValidateArticleName()
+		{
+			_epamMainPage.ClickInsightsButton();
+
+			var insightsPage = new InsightsPage(_driver, _wait, _actions, _driverHelper);
+			insightsPage.ClickSliderButton();
+			insightsPage.ClickSliderButton();
+			//Thread.Sleep(2000);
+
+			var slideText = insightsPage.GetSlideText();
+
+			insightsPage.ClickReadMoreButton();
+			//Thread.Sleep(5000);
+
+			///TODO create additional PageObjects
+			///
+			var readMorePageTitle = insightsPage.GetReadMorePageTitle();
+
+			Assert.AreEqual(slideText, readMorePageTitle);
 		}
 
 		[TestCleanup]

@@ -31,6 +31,7 @@ namespace WebDriverPractice.Helpers
 				//.MoveToElement(webElement)
 				.Pause(TimeSpan.FromSeconds(1))
 				.Click(webElement)
+				.Pause(TimeSpan.FromSeconds(1))
 				.Perform();
 		}
 
