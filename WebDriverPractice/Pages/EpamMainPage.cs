@@ -42,7 +42,12 @@ namespace WebDriverPractice.Pages
 		}
 
 		public void ClickCookieAcceptButton() => _driverHelper.Click(_cookieAcceptButton);
-		public void ClickCareersButton() => _driverHelper.Click(_careersButton);
+		public CarrerSearchPage ClickCareersButton() 
+		{ 
+			_driverHelper.Click(_careersButton); 
+			return new CarrerSearchPage(_driver, _wait, _actions, _driverHelper);
+		}
+
 		public void ClickAboutButton () => _driverHelper.Click(_aboutButton);
 		public void ClickInsightsButton() => _driverHelper.Click(_insightsButton);
 	}

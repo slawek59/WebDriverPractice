@@ -20,6 +20,8 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
+			///TODO incorporate headless mode
+
 			///TODO - download setup
 			var chromeOptions = new ChromeOptions();
 			chromeOptions.AddUserProfilePreference("download.default_directory", @"C:\Users\wassl\Downloads\");
@@ -49,11 +51,13 @@ namespace WebDriverPractice.Tests
 		{
 			bool isSearchResultDisplayed = false;
 
-			_epamMainPage.ClickCareersButton();
+			var carrerSearchPage = _epamMainPage.ClickCareersButton();
 
-			var carrerSearchResultPage = new CarrerSearchPage(_driver, _wait, _actions, _driverHelper);
+			var carrerSearchResultsPage = carrerSearchPage.PerfromCarrerSearchOperations(testData);
 
-			isSearchResultDisplayed = carrerSearchResultPage.PerfromCarrerSearchOperations(testData);
+			var jobDetailsPage = carrerSearchResultsPage.NavigateToLatestResult();
+
+			isSearchResultDisplayed = jobDetailsPage.IsSearchResultDisplayed(testData);
 
 			Assert.IsTrue(isSearchResultDisplayed);
 		}
@@ -103,6 +107,8 @@ namespace WebDriverPractice.Tests
 			_epamMainPage.ClickInsightsButton();
 
 			var insightsPage = new InsightsPage(_driver, _wait, _actions, _driverHelper);
+			
+			/// TODO add parametrized method in POM to click twice
 			insightsPage.ClickSliderButton();
 			insightsPage.ClickSliderButton();
 
