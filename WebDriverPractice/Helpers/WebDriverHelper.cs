@@ -19,16 +19,9 @@ namespace WebDriverPractice.Helpers
 
 		public void Click(By locator)
 		{
-			//var webElement = _wait.Until(driver =>
-			//{
-			//	var element = _driver.FindElement(locator);
-			//	return element.Displayed && element.Enabled ? element : null;
-			//});
-
 			var webElement = _wait.Until(driver => _driver.FindElement(locator));
 
 			_actions
-				//.MoveToElement(webElement)
 				.Pause(TimeSpan.FromSeconds(1))
 				.Click(webElement)
 				.Pause(TimeSpan.FromSeconds(1))
@@ -37,11 +30,6 @@ namespace WebDriverPractice.Helpers
 
 		public void SendKeys(By locator, string keys)
 		{
-			//var webElement = _wait.Until(driver =>
-			//{
-			//	var element = _driver.FindElement(locator);
-			//	return element.Displayed && element.Enabled ? element : null;
-			//});
 			var webElement = _wait.Until(driver => _driver.FindElement(locator));
 
 			_actions
@@ -55,11 +43,6 @@ namespace WebDriverPractice.Helpers
 
 		public IWebElement FindElementWithWait(By locator)
 		{
-			//var webElement = _wait.Until(driver =>
-			//{
-			//	var element = _driver.FindElement(locator);
-			//	return element.Displayed && element.Enabled ? element : null;
-			//});
 			var webElement = _wait.Until(driver => _driver.FindElement(locator));
 
 			return webElement;
@@ -67,11 +50,6 @@ namespace WebDriverPractice.Helpers
 
 		public IList<IWebElement> FindElementsWithWait(By locator)
 		{
-			//var webElement = _wait.Until(driver =>
-			//{
-			//	var element = _driver.FindElement(locator);
-			//	return element.Displayed && element.Enabled ? element : null;
-			//});
 			var webElements = _wait.Until(driver => _driver.FindElements(locator));
 
 			return webElements;
@@ -85,6 +63,5 @@ namespace WebDriverPractice.Helpers
 		{
 			((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", element);
 		}
-
 	}
 }

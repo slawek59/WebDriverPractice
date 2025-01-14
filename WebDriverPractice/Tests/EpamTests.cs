@@ -41,9 +41,6 @@ namespace WebDriverPractice.Tests
 			_epamMainPage.MaximizeWindow();
 			_epamMainPage.OpenPage();
 			_epamMainPage.ClickCookieAcceptButton();
-
-			//_driver.Manage().Window.Maximize();
-			//_driver.Url = "https://www.epam.com";
 		}
 
 		[TestMethod]
@@ -55,12 +52,6 @@ namespace WebDriverPractice.Tests
 			_epamMainPage.ClickCareersButton();
 
 			var carrerSearchResultPage = new CarrerSearchPage(_driver, _wait, _actions, _driverHelper);
-
-			//carrerSearchResultPage.ClickRemoteOptionCheckbox();
-
-			//carrerSearchResultPage.SendKeysToKeywordsInputField(testData);
-
-			//carrerSearchResultPage.ClickLocationsDropdownButton();
 
 			isSearchResultDisplayed = carrerSearchResultPage.PerfromCarrerSearchOperations(testData);
 
@@ -76,11 +67,6 @@ namespace WebDriverPractice.Tests
 			bool doAllLinksContainKeyword = false;
 
 			_epamMainPage.SearchForKeyword(keyword);
-
-			//IList<IWebElement> searchResultsContainer = wait.Until(driver => driver.FindElements(By.XPath("//div[@class='search-results__items']//a")));
-			//wait.Until(driver => searchResultsContainer.All(element => element.Displayed));
-
-			//doAllLinksContainKeyword = searchResultsContainer.All(item => item.Text.Contains(keys));
 
 			var searchResultPage = new SearchResultPage(_driver, _wait, _actions, _driverHelper);
 
@@ -100,8 +86,6 @@ namespace WebDriverPractice.Tests
 			aboutPage.Download();
 
 			Thread.Sleep(10000); ///TODO - out z tym
-
-			//var filePath = Path.Combine(@"C:\Users\wassl\Downloads\", fileName); 
 
 			var doesFileExist = File.Exists(filePath);
 
@@ -123,12 +107,10 @@ namespace WebDriverPractice.Tests
 			var insightsPage = new InsightsPage(_driver, _wait, _actions, _driverHelper);
 			insightsPage.ClickSliderButton();
 			insightsPage.ClickSliderButton();
-			//Thread.Sleep(2000);
 
 			var slideText = insightsPage.GetSlideText();
 
 			insightsPage.ClickReadMoreButton();
-			//Thread.Sleep(5000);
 
 			///TODO create additional PageObjects
 			///

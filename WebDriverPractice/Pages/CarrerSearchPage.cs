@@ -1,19 +1,11 @@
-﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 using WebDriverPractice.Helpers;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WebDriverPractice.Pages
 {
-    public class CarrerSearchPage
+	public class CarrerSearchPage
     {
         private IWebDriver _driver;
         private WebDriverWait _wait;
@@ -48,22 +40,12 @@ namespace WebDriverPractice.Pages
 
             _driverHelper.ScrollToElement(_sortLegend);
             
-            //_actions.MoveToElement(_driverHelper.FindTheElement(_sortByDate)).Click().Perform();
             var date = _driverHelper.FindElementWithWait(_sortByDate);
-
-            //((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click();", date);
+            
             _driverHelper.ClickWithJS(date);
-
             _driverHelper.Click(_latestViewAndApplyButton);
 
             return _driverHelper.FindElementWithWait(_finalContent).Text.Contains($"{keys}", StringComparison.OrdinalIgnoreCase);
         }
-
-        //public void ClickRemoteOptionCheckbox() => _driverHelper.Click(_remoteOptionCheckbox);
-        //public void SendKeysToKeywordsInputField(string keys) => _driverHelper.SendKeys(_keywordsInputField, keys);
-        //public void ClickLocationsDropdownButton() => _driverHelper.Click(_locationsDropdown);
-        //public void SelectAllLocationsOption() => _driverHelper.Click(_allLocationsOption);
-
-
     }
 }
