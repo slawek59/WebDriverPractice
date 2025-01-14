@@ -66,12 +66,10 @@ namespace WebDriverPractice.Tests
 		{
 			bool doAllLinksContainKeyword = false;
 
-			_epamMainPage.SearchForKeyword(keyword);
-
-			var searchResultPage = new SearchResultPage(_driver, _wait, _actions, _driverHelper);
+			var searchResultPage = _epamMainPage.SearchForKeyword(keyword);
 
 			doAllLinksContainKeyword = searchResultPage.DoAllLinksContainKeyword(keyword);
-			///TODO really all links? you mean <a> ?!?!
+
 			Assert.IsTrue(doAllLinksContainKeyword);
 		}
 

@@ -32,11 +32,13 @@ namespace WebDriverPractice.Pages
 
 		public void MaximizeWindow() => _driver.Manage().Window.Maximize();
 		public void OpenPage() => _driver.Navigate().GoToUrl(BaseURL);
-		public void SearchForKeyword(string keyword)
+		public SearchResultPage SearchForKeyword(string keyword)
 		{
 			_driverHelper.Click(_magnifierButton);
 			_driverHelper.SendKeys(_inputField, keyword);
 			_driverHelper.Click(_findButton);
+
+			return new SearchResultPage(_driver, _wait, _actions, _driverHelper);
 		}
 
 		public void ClickCookieAcceptButton() => _driverHelper.Click(_cookieAcceptButton);
