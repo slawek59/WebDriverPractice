@@ -120,7 +120,7 @@ namespace WebDriverPractice.Tests
 		[TestCleanup]
 		public void Cleanup()
 		{
-			_driver.Dispose();
+			_driver.Quit();
 		}
 	}
 }
