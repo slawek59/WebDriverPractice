@@ -5,6 +5,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Helpers;
 using WebDriverPractice.Pages;
+using WebDriverPractice.Data;
 
 namespace WebDriverPractice.Tests
 {
@@ -78,22 +79,17 @@ namespace WebDriverPractice.Tests
 		}
 
 		[TestMethod]
-		[DataRow("C:\\Users\\wassl\\Downloads\\EPAM_Corporate_Overview_Q4_EOY.pdf")]
-		public void AboutPage_ClickDownload_Downloads(string filePath)
+		public void AboutPage_ClickDownload_Downloads()
 		{
 			var aboutPage = _epamMainPage.ClickAboutButton();
 
-			aboutPage.ClickDownloadButtonAndWaitUntilDone();
-
-			Thread.Sleep(10000); ///TODO - out z tym
-
-			var doesFileExist = File.Exists(filePath);
+			var doesFileExist = aboutPage.ClickDownloadButtonAndWaitUntilDone();
 
 			var canFileBeDeleted = doesFileExist;
 
 			if (canFileBeDeleted)
 			{
-				File.Delete(filePath);
+				File.Delete(DataConstants.DownloadFilePath);
 			}
 
 			Assert.IsTrue(doesFileExist);

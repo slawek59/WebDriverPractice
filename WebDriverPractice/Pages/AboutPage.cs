@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Helpers;
+using WebDriverPractice.Data;
 
 namespace WebDriverPractice.Pages
 {
@@ -23,10 +24,12 @@ namespace WebDriverPractice.Pages
 			_driverHelper = driverHelper;
 		}
 
-		public void ClickDownloadButtonAndWaitUntilDone()
+		public bool ClickDownloadButtonAndWaitUntilDone()
 		{
 			_driverHelper.ScrollToElement(_section);
 			_driverHelper.Click(_downloadButton);
+			
+			return _wait.Until(driver => File.Exists(DataConstants.DownloadFilePath));
 		}
 	}
 }
