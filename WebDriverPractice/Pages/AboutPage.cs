@@ -2,12 +2,13 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Helpers;
-using WebDriverPractice.Data;
 
 namespace WebDriverPractice.Pages
 {
 	public class AboutPage
 	{
+		public readonly string DownloadFilePath = "C:\\Users\\wassl\\Downloads\\EPAM_Corporate_Overview_Q4_EOY.pdf";
+
 		private readonly IWebDriver _driver;
 		private readonly WebDriverWait _wait;
 		private readonly Actions _actions;
@@ -29,7 +30,7 @@ namespace WebDriverPractice.Pages
 			_driverHelper.ScrollToElement(_section);
 			_driverHelper.Click(_downloadButton);
 			
-			return _wait.Until(driver => File.Exists(DataConstants.DownloadFilePath));
+			return _wait.Until(driver => File.Exists(DownloadFilePath));
 		}
 	}
 }

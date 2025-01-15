@@ -2,12 +2,13 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Helpers;
+using WebDriverPractice.Data;
 
 namespace WebDriverPractice.Pages
 {
 	public class EpamMainPage
 	{
-		private const string BaseURL = "https://www.epam.com";
+		//private const string BaseURL = "https://www.epam.com";
 		private readonly IWebDriver _driver;
 		private readonly WebDriverWait _wait;
 		private readonly Actions _actions;
@@ -31,7 +32,7 @@ namespace WebDriverPractice.Pages
 		}
 
 		public void MaximizeWindow() => _driver.Manage().Window.Maximize();
-		public void OpenPage() => _driver.Navigate().GoToUrl(BaseURL);
+		public void OpenPage() => _driver.Navigate().GoToUrl(DataConstants.BaseURL);
 		public SearchResultPage SearchForKeyword(string keyword)
 		{
 			_driverHelper.Click(_magnifierButton);

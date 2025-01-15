@@ -89,7 +89,7 @@ namespace WebDriverPractice.Tests
 
 			if (canFileBeDeleted)
 			{
-				File.Delete(DataConstants.DownloadFilePath);
+				File.Delete(aboutPage.DownloadFilePath);
 			}
 
 			Assert.IsTrue(doesFileExist);

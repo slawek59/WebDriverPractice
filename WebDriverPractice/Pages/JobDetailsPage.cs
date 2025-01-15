@@ -23,6 +23,7 @@ namespace WebDriverPractice.Pages
 
 		public bool IsSearchResultDisplayed(string keys)
         {
+			/// TODO shouldnt it be in helper?
 			return _driverHelper.FindElementWithWait(_finalContent).Text.Contains($"{keys}", StringComparison.OrdinalIgnoreCase);
 		}
 	}
