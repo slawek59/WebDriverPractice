@@ -23,7 +23,7 @@ namespace WebDriverPractice.Pages
 			_driverHelper = driverHelper;
 		}
 
-		public void Download()
+		public void ClickDownloadButtonAndWaitUntilDone()
 		{
 			_driverHelper.ScrollToElement(_section);
 			_driverHelper.Click(_downloadButton);

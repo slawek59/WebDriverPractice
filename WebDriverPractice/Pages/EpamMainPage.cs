@@ -48,7 +48,12 @@ namespace WebDriverPractice.Pages
 			return new CarrerSearchPage(_driver, _wait, _actions, _driverHelper);
 		}
 
-		public void ClickAboutButton () => _driverHelper.Click(_aboutButton);
-		public void ClickInsightsButton() => _driverHelper.Click(_insightsButton);
+		public AboutPage ClickAboutButton()
+		{
+			_driverHelper.Click(_aboutButton);
+
+			return new AboutPage(_driver, _wait, _actions, _driverHelper);
+		}
+			public void ClickInsightsButton() => _driverHelper.Click(_insightsButton);
 	}
 }

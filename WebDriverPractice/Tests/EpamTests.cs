@@ -81,11 +81,9 @@ namespace WebDriverPractice.Tests
 		[DataRow("C:\\Users\\wassl\\Downloads\\EPAM_Corporate_Overview_Q4_EOY.pdf")]
 		public void AboutPage_ClickDownload_Downloads(string filePath)
 		{
-			_epamMainPage.ClickAboutButton();
+			var aboutPage = _epamMainPage.ClickAboutButton();
 
-			var aboutPage = new AboutPage(_driver, _wait, _actions, _driverHelper);
-
-			aboutPage.Download();
+			aboutPage.ClickDownloadButtonAndWaitUntilDone();
 
 			Thread.Sleep(10000); ///TODO - out z tym
 
