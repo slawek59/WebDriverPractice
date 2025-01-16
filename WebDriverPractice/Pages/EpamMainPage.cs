@@ -31,7 +31,7 @@ namespace WebDriverPractice.Pages
 			_driverHelper = driverHelper;
 		}
 
-		public void MaximizeWindow() => _driver.Manage().Window.Maximize();
+		//public void MaximizeWindow() => _driver.Manage().Window.Maximize();
 		public void OpenPage() => _driver.Navigate().GoToUrl(DataConstants.BaseURL);
 		public SearchResultPage SearchForKeyword(string keyword)
 		{
