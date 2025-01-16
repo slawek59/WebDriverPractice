@@ -96,25 +96,20 @@ namespace WebDriverPractice.Tests
 		}
 
 		[TestMethod]
-		public void InsightsPage_ClickReadMoreButtonOnThirdSlide_ValidateArticleName()
+		[DataRow(DataConstants.ClickTimes)]
+		public void InsightsPage_ClickReadMoreButtonOnThirdSlide_ValidateArticleName(int clickTimes)
 		{
-			_epamMainPage.ClickInsightsButton();
+			var insightsPage = _epamMainPage.ClickInsightsButton();
 
-			var insightsPage = new InsightsPage(_driver, _wait, _actions, _driverHelper);
-			
-			/// TODO add parametrized method in POM to click twice
-			insightsPage.ClickSliderButton();
-			insightsPage.ClickSliderButton();
+			insightsPage.ClickSliderButton(clickTimes);
 
 			var slideText = insightsPage.GetSlideText();
 
-			insightsPage.ClickReadMoreButton();
+			var insightsReadMorePage = insightsPage.ClickReadMoreButton();
 
-			///TODO create additional PageObjects
-			///
-			var readMorePageTitle = insightsPage.GetReadMorePageTitle();
+			var insightsReadMorePageTitle = insightsReadMorePage.GetReadMorePageTitle();
 
-			Assert.AreEqual(slideText, readMorePageTitle);
+			Assert.AreEqual(slideText, insightsReadMorePageTitle);
 		}
 
 		[TestCleanup]
@@ -124,3 +119,5 @@ namespace WebDriverPractice.Tests
 		}
 	}
 }
+
+/// TODO get rid off reduntant usings, waits and actions etc; 

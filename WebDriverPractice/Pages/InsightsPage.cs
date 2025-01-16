@@ -15,7 +15,6 @@ namespace WebDriverPractice.Pages
 		private readonly By _sliderButton = By.XPath("//div[@class='slider-ui-23   media-content ']//button[@class='slider__right-arrow slider-navigation-arrow']");
 		private readonly By _readMoreButton = By.XPath("(//div[@class='owl-item active']//a)[1]");
 		private readonly By _slideTitle = By.XPath("(//div[@class='owl-item active']//p)[1]");
-		private readonly By _readMorePageTitle = By.XPath("//span[@class='font-size-80-33']/span[@class='museo-sans-light']");
 
 		public InsightsPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
 		{
@@ -25,9 +24,20 @@ namespace WebDriverPractice.Pages
 			_driverHelper = driverHelper;
 		}
 
-		public void ClickSliderButton() => _driverHelper.Click(_sliderButton);
+		public void ClickSliderButton(int clickTimes)
+		{
+			for (int i = 0; i < clickTimes; i++)
+			{
+				_driverHelper.Click(_sliderButton);
+			}
+		}
+
 		public string GetSlideText() => _driverHelper.FindElementWithWait(_slideTitle).Text.Trim();
-		public void ClickReadMoreButton() => _driverHelper.ClickWithJS(_driverHelper.FindElementWithWait(_readMoreButton));
-		public string GetReadMorePageTitle() => _driverHelper.FindElementWithWait(_readMorePageTitle).Text.Trim();
+		public InsightsReadMorePage ClickReadMoreButton()
+		{
+			_driverHelper.ClickWithJS(_driverHelper.FindElementWithWait(_readMoreButton));
+
+			return new InsightsReadMorePage(_driver, _wait, _actions, _driverHelper);
+		}
 	}
 }
