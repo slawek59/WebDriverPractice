@@ -17,10 +17,6 @@ namespace WebDriverPractice.Pages
         private readonly By _locationsDropdown = By.CssSelector("span.select2-selection__rendered");
         private readonly By _allLocationsOption = By.XPath("//li[contains(text(),'All Locations')]");
         private readonly By _findButton = By.XPath("//form/child::button");
-        //private readonly By _sortLegend = By.XPath("//div[@class='search-result__sorting-menu']");
-        //private readonly By _sortByDate = By.XPath("//input[@id='sort-time']");
-        //private readonly By _latestViewAndApplyButton = By.XPath("//ul[@class='search-result__list']/li[1]//a[contains(text(), 'View and apply')]");
-        //private readonly By _finalContent = By.XPath("//div[@class='section__wrapper']");
 
         public CarrerSearchPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
         {
@@ -37,15 +33,6 @@ namespace WebDriverPractice.Pages
             _driverHelper.Click(_locationsDropdown);
             _driverHelper.Click(_allLocationsOption);
             _driverHelper.Click(_findButton);
-
-            //_driverHelper.ScrollToElement(_sortLegend);
-
-            //var date = _driverHelper.FindElementWithWait(_sortByDate);
-
-            //_driverHelper.ClickWithJS(date);
-            //_driverHelper.Click(_latestViewAndApplyButton);
-
-            //return _driverHelper.FindElementWithWait(_finalContent).Text.Contains($"{keys}", StringComparison.OrdinalIgnoreCase);
 
             return new CarrerSearchResultsPage(_driver, _wait, _actions, _driverHelper);
         }

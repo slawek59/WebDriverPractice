@@ -1,12 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using WebDriverPractice.Helpers;
-using WebDriverPractice.Pages;
 using WebDriverPractice.Data;
 using WebDriverPractice.Driver;
+using WebDriverPractice.Helpers;
+using WebDriverPractice.Pages;
 
 namespace WebDriverPractice.Tests
 {
@@ -22,24 +21,8 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			//var args = Environment.GetCommandLineArgs();
-
 			var isHeadlessMode = Environment.GetEnvironmentVariable("setting") == "headless";
-			Console.WriteLine(isHeadlessMode);
-
-			//var chromeOptions = new ChromeOptions();
-			//chromeOptions.AddUserProfilePreference("download.default_directory", DataConstants.DownloadDirectory);
-			//chromeOptions.AddUserProfilePreference("download.prompt_for_download", false);
-			//chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
-
-			//if (isHeadlessMode)
-			//{
-			//	chromeOptions.AddArgument("--headless");
-			//	chromeOptions.AddArgument("--window-size=1920,1080");
-			//}
-
-			//_driver = new ChromeDriver(chromeOptions);
-
+			
 			_driver = DriverInstance.GetInstance(isHeadlessMode);
 
 			_wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
@@ -51,7 +34,6 @@ namespace WebDriverPractice.Tests
 			_actions = new Actions(_driver);
 			_driverHelper = new WebDriverHelper(_driver, _wait, _actions);
 			_epamMainPage = new EpamMainPage(_driver, _wait, _actions, _driverHelper);
-			//_epamMainPage.MaximizeWindow();
 			_epamMainPage.OpenPage();
 			_epamMainPage.ClickCookieAcceptButton();
 		}
@@ -70,7 +52,7 @@ namespace WebDriverPractice.Tests
 
 			isSearchResultDisplayed = jobDetailsPage.IsSearchResultDisplayed(testData);
 
-			Assert.IsTrue(isSearchResultDisplayed);
+			Assert.IsTrue(isSearchResultDisplayed, "Search result was not displayed.");
 		}
 
 		[TestMethod]
@@ -85,7 +67,7 @@ namespace WebDriverPractice.Tests
 
 			doAllLinksContainKeyword = searchResultPage.DoAllLinksContainKeyword(keyword);
 
-			Assert.IsTrue(doAllLinksContainKeyword);
+			Assert.IsTrue(doAllLinksContainKeyword,"All links do not contain the searched keyword.");
 		}
 
 		[TestMethod]
@@ -103,7 +85,7 @@ namespace WebDriverPractice.Tests
 				File.Delete(fileName);
 			}
 
-			Assert.IsTrue(doesFileExist);
+			Assert.IsTrue(doesFileExist, "File does not exist.");
 		}
 
 		[TestMethod]
@@ -120,7 +102,7 @@ namespace WebDriverPractice.Tests
 
 			var insightsReadMorePageTitle = insightsReadMorePage.GetReadMorePageTitle();
 
-			Assert.AreEqual(slideText, insightsReadMorePageTitle);
+			Assert.AreEqual(slideText, insightsReadMorePageTitle, "Texts are not equal.");
 		}
 
 		[TestCleanup]
@@ -130,5 +112,3 @@ namespace WebDriverPractice.Tests
 		}
 	}
 }
-
-/// TODO get rid off reduntant usings, waits and actions etc; 
