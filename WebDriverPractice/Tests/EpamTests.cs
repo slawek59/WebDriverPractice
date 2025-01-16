@@ -21,15 +21,21 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			///TODO incorporate headless mode
+			var args = Environment.GetCommandLineArgs();
+			var isHeadlessMode = args.Contains("--headless");
 
-			///TODO - download setup
 			var chromeOptions = new ChromeOptions();
 			chromeOptions.AddUserProfilePreference("download.default_directory", @"C:\Users\wassl\Downloads\");
 			chromeOptions.AddUserProfilePreference("download.prompt_for_download", false);
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
-			///TODO - end of download setup
-			///
+
+			if (isHeadlessMode)
+			{
+				chromeOptions.AddArgument("--headless");
+				chromeOptions.AddArgument("--disable-gpu");
+				chromeOptions.AddArgument("--window-size=1920,1080");
+			}
+
 			_driver = new ChromeDriver(@"C:\chromedriver", chromeOptions);
 
 			_wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
@@ -79,7 +85,8 @@ namespace WebDriverPractice.Tests
 		}
 
 		[TestMethod]
-		public void AboutPage_ClickDownload_Downloads()
+		[DataRow(AboutPage.DownloadFilePath)]
+		public void AboutPage_ClickDownload_Downloads(string fileName)
 		{
 			var aboutPage = _epamMainPage.ClickAboutButton();
 
@@ -89,7 +96,7 @@ namespace WebDriverPractice.Tests
 
 			if (canFileBeDeleted)
 			{
-				File.Delete(aboutPage.DownloadFilePath);
+				File.Delete(fileName);
 			}
 
 			Assert.IsTrue(doesFileExist);

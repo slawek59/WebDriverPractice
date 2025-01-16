@@ -7,7 +7,7 @@ namespace WebDriverPractice.Pages
 {
 	public class AboutPage
 	{
-		public readonly string DownloadFilePath = "C:\\Users\\wassl\\Downloads\\EPAM_Corporate_Overview_Q4_EOY.pdf";
+		public const string DownloadFilePath = "C:\\Users\\wassl\\Downloads\\EPAM_Corporate_Overview_Q4_EOY.pdf";
 
 		private readonly IWebDriver _driver;
 		private readonly WebDriverWait _wait;
