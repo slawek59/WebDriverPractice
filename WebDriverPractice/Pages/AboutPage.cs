@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Helpers;
+using Serilog;
 
 namespace WebDriverPractice.Pages
 {
@@ -19,6 +20,7 @@ namespace WebDriverPractice.Pages
 
 		public AboutPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
 		{
+			Log.Information($"Open {this.GetType().Name} page.");
 			_driver = driver;
 			_wait = wait;
 			_actions = actions;
@@ -27,7 +29,10 @@ namespace WebDriverPractice.Pages
 
 		public bool ClickDownloadButtonAndWaitUntilDone()
 		{
+			Log.Information($"Scroll to {nameof(_section)}.");
 			_driverHelper.ScrollToElement(_section);
+			
+			Log.Information($"Click {nameof(_downloadButton)}.");
 			_driverHelper.Click(_downloadButton);
 			
 			return _wait.Until(driver => File.Exists(DownloadFilePath));

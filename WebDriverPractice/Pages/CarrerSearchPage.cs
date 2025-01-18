@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Helpers;
+using Serilog;
 
 namespace WebDriverPractice.Pages
 {
@@ -20,7 +21,8 @@ namespace WebDriverPractice.Pages
 
         public CarrerSearchPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
         {
-            _driver = driver;
+			Log.Information($"Open {this.GetType().Name} page.");
+			_driver = driver;
             _wait = wait;
             _actions = actions;
             _driverHelper = driverHelper;
@@ -28,11 +30,20 @@ namespace WebDriverPractice.Pages
 
         public CarrerSearchResultsPage PerfromCarrerSearchOperations(string keys)
         {
-            _driverHelper.Click(_remoteOptionCheckbox);
-            _driverHelper.SendKeys(_keywordsInputField, keys);
-            _driverHelper.Click(_locationsDropdown);
-            _driverHelper.Click(_allLocationsOption);
-            _driverHelper.Click(_findButton);
+			Log.Information($"Click {nameof(_remoteOptionCheckbox)}.");
+			_driverHelper.Click(_remoteOptionCheckbox);
+
+			Log.Information($"Send '{keys}' to {nameof(_keywordsInputField)}.");
+			_driverHelper.SendKeys(_keywordsInputField, keys);
+
+			Log.Information($"Click {nameof(_locationsDropdown)}.");
+			_driverHelper.Click(_locationsDropdown);
+
+			Log.Information($"Click {nameof(_allLocationsOption)}.");
+			_driverHelper.Click(_allLocationsOption);
+
+			Log.Information($"Click {nameof(_findButton)}.");
+			_driverHelper.Click(_findButton);
 
             return new CarrerSearchResultsPage(_driver, _wait, _actions, _driverHelper);
         }

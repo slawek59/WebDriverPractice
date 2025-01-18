@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using WebDriverPractice.Data;
+using Serilog;
 
 namespace WebDriverPractice.Driver
 {
@@ -12,6 +13,7 @@ namespace WebDriverPractice.Driver
 
 			if (isHeadlessModeOn)
 			{
+				Log.Information("Open in headless mode.");
 				chromeOptions.AddArgument("--headless");
 				chromeOptions.AddArgument("--window-size=1920,1080");
 			}
@@ -20,7 +22,7 @@ namespace WebDriverPractice.Driver
 			chromeOptions.AddUserProfilePreference("download.prompt_for_download", false);
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
 
-
+			Log.Information("Initialize driver.");
 			var driver = new ChromeDriver(DataConstants.ChromeDriverDirectory, chromeOptions);
 
 			if (!isHeadlessModeOn)

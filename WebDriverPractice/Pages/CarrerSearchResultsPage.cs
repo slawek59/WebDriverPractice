@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using Serilog;
 using WebDriverPractice.Helpers;
 
 namespace WebDriverPractice.Pages
@@ -18,6 +19,7 @@ namespace WebDriverPractice.Pages
 
 		public CarrerSearchResultsPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
 		{
+			Log.Information($"Open {this.GetType().Name} page.");
 			_driver = driver;
 			_wait = wait;
 			_actions = actions;
@@ -26,11 +28,15 @@ namespace WebDriverPractice.Pages
 
 		public JobDetailsPage NavigateToLatestResult()
 		{
+			Log.Information($"Scroll to {nameof(_sortLegend)}.");
 			_driverHelper.ScrollToElement(_sortLegend);
 
 			var date = _driverHelper.FindElementWithWait(_sortByDate);
 
+			Log.Information($"Click {nameof(date)}.");
 			_driverHelper.ClickWithJS(date);
+
+			Log.Information($"Click {nameof(_latestViewAndApplyButton)}.");
 			_driverHelper.Click(_latestViewAndApplyButton);
 
 			return new JobDetailsPage(_driver, _wait, _actions, _driverHelper);

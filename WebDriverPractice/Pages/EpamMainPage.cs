@@ -3,6 +3,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Helpers;
 using WebDriverPractice.Data;
+using Serilog;
 
 namespace WebDriverPractice.Pages
 {
@@ -24,6 +25,7 @@ namespace WebDriverPractice.Pages
 
 		public EpamMainPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
 		{
+			Log.Information($"Open {this.GetType().Name} page.");
 			_driver = driver;
 			_wait = wait;
 			_actions = actions;
@@ -31,10 +33,16 @@ namespace WebDriverPractice.Pages
 		}
 
 		public void OpenPage() => _driver.Navigate().GoToUrl(DataConstants.BaseURL);
+
 		public SearchResultPage SearchForKeyword(string keyword)
 		{
+			Log.Information($"Click {nameof(_magnifierButton)}.");
 			_driverHelper.Click(_magnifierButton);
+
+			Log.Information($"Send '{keyword}' to {_inputField}.");
 			_driverHelper.SendKeys(_inputField, keyword);
+
+			Log.Information($"Click {nameof(_findButton)}.");
 			_driverHelper.Click(_findButton);
 
 			return new SearchResultPage(_driver, _wait, _actions, _driverHelper);
@@ -43,18 +51,22 @@ namespace WebDriverPractice.Pages
 		public void ClickCookieAcceptButton() => _driverHelper.Click(_cookieAcceptButton);
 		public CarrerSearchPage ClickCareersButton()
 		{
+			Log.Information($"Click {nameof(_careersButton)}.");
 			_driverHelper.Click(_careersButton);
+
 			return new CarrerSearchPage(_driver, _wait, _actions, _driverHelper);
 		}
 
 		public AboutPage ClickAboutButton()
 		{
+			Log.Information($"Click {nameof(_aboutButton)}.");
 			_driverHelper.Click(_aboutButton);
 
 			return new AboutPage(_driver, _wait, _actions, _driverHelper);
 		}
 		public InsightsPage ClickInsightsButton()
 		{
+			Log.Information($"Click {nameof(_insightsButton)}.");
 			_driverHelper.Click(_insightsButton);
 
 			return new InsightsPage(_driver, _wait, _actions, _driverHelper);

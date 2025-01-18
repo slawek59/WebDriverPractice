@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using Serilog;
 using WebDriverPractice.Helpers;
 
 namespace WebDriverPractice.Pages
@@ -15,6 +16,7 @@ namespace WebDriverPractice.Pages
 
 		public JobDetailsPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
 		{
+			Log.Information($"Open {this.GetType().Name} page.");
 			_driver = driver;
 			_wait = wait;
 			_actions = actions;

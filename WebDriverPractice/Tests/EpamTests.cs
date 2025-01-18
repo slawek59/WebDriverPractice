@@ -1,13 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Internal.Logging;
 using OpenQA.Selenium.Support.UI;
+using Serilog;
 using WebDriverPractice.Data;
 using WebDriverPractice.Driver;
 using WebDriverPractice.Helpers;
 using WebDriverPractice.Pages;
-using Serilog;
 using Log = Serilog.Log;
 
 namespace WebDriverPractice.Tests
@@ -28,12 +27,14 @@ namespace WebDriverPractice.Tests
 		[AssemblyInitialize]
 		public static void AssemblyInitialize(TestContext testContext)
 		{
+			var now = DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss-fff");
+			///TODO into separate class (path setting as well)
 			Log.Logger = new LoggerConfiguration()
 				.WriteTo.Console()
-				.WriteTo.File($"test-logs.txt", rollingInterval: RollingInterval.Day)
+				.WriteTo.File(Path.Combine(Environment.CurrentDirectory, $"Logs_{now}.txt"))
 				.CreateLogger();
 
-			Log.Information("Assembly initialization.");
+			Log.Information("Assembly initialization.\n");
 		}
 
 
@@ -62,7 +63,7 @@ namespace WebDriverPractice.Tests
 		[DataRow("JavaScript")]
 		public void CareerSearch_ProvideKeyword_GetProperResult(string testData)
 		{
-			Log.Information($"{TestContext.TestName} test method starts");
+			Log.Information($"{TestContext.TestName} test method starts.");
 
 			bool isSearchResultDisplayed = false;
 
@@ -78,15 +79,15 @@ namespace WebDriverPractice.Tests
 		}
 
 		[TestMethod]
-		[DataRow("blockchain")]
-		[DataRow("cloud")]
-		[DataRow("automation")]
+		[DataRow("BLOCKCHAIN")] 
+		[DataRow("Cloud")]
+		[DataRow("Automation")]
 		public void GlobalSearch_ProvideInput_GetProperResult(string keyword)
 		{
-			Log.Information($"{TestContext.TestName} test method starts");
-
+			Log.Information($"{TestContext.TestName} test method starts with '{keyword}' keyword.");
+			/// TODO case insensitive????
 			bool doAllLinksContainKeyword = false;
-
+			/// TODO sth wrong in pom
 			var searchResultPage = _epamMainPage.SearchForKeyword(keyword);
 
 			doAllLinksContainKeyword = searchResultPage.DoAllLinksContainKeyword(keyword);
@@ -98,7 +99,7 @@ namespace WebDriverPractice.Tests
 		[DataRow(AboutPage.DownloadFilePath)]
 		public void AboutPage_ClickDownload_Downloads(string fileName)
 		{
-			Log.Information($"{TestContext.TestName} test method starts");
+			Log.Information($"{TestContext.TestName} test method starts and checking for '{fileName}' download.");
 			
 			var aboutPage = _epamMainPage.ClickAboutButton();
 
@@ -118,8 +119,10 @@ namespace WebDriverPractice.Tests
 		[DataRow(DataConstants.ClickTimes)]
 		public void InsightsPage_ClickReadMoreButtonOnThirdSlide_ValidateArticleName(int clickTimes)
 		{
-			var insightsPage = _epamMainPage.ClickInsightsButton();
+			Log.Information($"{TestContext.TestName} test method starts. Number of swipes: {clickTimes}.");
 
+			var insightsPage = _epamMainPage.ClickInsightsButton();
+			
 			insightsPage.ClickSliderButton(clickTimes);
 
 			var slideText = insightsPage.GetSlideText();
@@ -134,27 +137,33 @@ namespace WebDriverPractice.Tests
 		[TestCleanup]
 		public void Cleanup()
 		{
-			Log.Information("Closing WebDriver.");
-			_driver.Quit();
+			///TODO this stuff as non-specific should probably be also placed into a separate place
 
 			if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
 			{
-				Log.Error($"{TestContext.TestName} failed.");
+				Log.Error($"\n!---{TestContext.TestName} FAILED.---!\n");
+				var screenshotDriver = (ITakesScreenshot)_driver;
+				ScreenshotMaker.TakeBrowserScreenshot(screenshotDriver);
 			}
 			else if (TestContext.CurrentTestOutcome == UnitTestOutcome.Passed)
 			{
-				Log.Information($"{TestContext.TestName} passed.");
+				Log.Information($"{TestContext.TestName} PASSED.");
 			}
+
+			Log.Information($"Closing WebDriver.\n");
+			_driver.Quit();
 		}
 
 		[AssemblyCleanup]
 		public static void AssemblyCleanup()
 		{
+			Log.Information($"Assembly Cleanup.");
+
 			Log.CloseAndFlush();
 		}
 	}
 }
-
+///TODO headless dla career cos nie dziala, chyba problem z button
 
 /// TODO TAF
 //The solution should be split into next layers:
@@ -174,3 +183,6 @@ namespace WebDriverPractice.Tests
 
 //Tasks #1-#4:
 //Refactor automated tests created in previous module to follow SOLID, DRY, KISS, YAGNI principles, use Design Patterns (Singleton and Browser Factory) and add logging mechanism.  Solution should have Layers in Architecture and be able to execute on several environments.
+
+
+///TODO logging and screenshot date and time format to check

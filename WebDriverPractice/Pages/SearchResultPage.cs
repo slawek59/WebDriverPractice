@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using Serilog;
 using WebDriverPractice.Helpers;
 
 namespace WebDriverPractice.Pages
@@ -16,6 +17,7 @@ namespace WebDriverPractice.Pages
 
 		public SearchResultPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
 		{
+			Log.Information($"Open {this.GetType().Name} page.");
 			_driver = driver;
 			_wait = wait;
 			_actions = actions;
@@ -27,7 +29,17 @@ namespace WebDriverPractice.Pages
 			IList<IWebElement> searchResultsContainer = _driverHelper.FindElementsWithWait(_searchResultContainer);
 			_wait.Until(driver => searchResultsContainer.All(element => element.Displayed));
 
-			return searchResultsContainer.All(item => item.Text.Contains(keyword));
+			var doesAllResultsContainKeyword = searchResultsContainer.All(item => item.Text.Contains(keyword));
+
+			if (!doesAllResultsContainKeyword)
+			{
+				var elementWithoutKeyword = searchResultsContainer
+					.FirstOrDefault(item => !item.Text.Contains(keyword));
+
+				_actions.ScrollToElement(elementWithoutKeyword).Perform();
+			}
+
+			return doesAllResultsContainKeyword;
 		}
 	}
 }
