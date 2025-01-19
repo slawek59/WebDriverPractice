@@ -1,10 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Data;
 using WebDriverPractice.Driver;
-using WebDriverPractice.Helpers;
 using WebDriverPractice.Pages;
 
 namespace WebDriverPractice.Tests
@@ -12,28 +9,14 @@ namespace WebDriverPractice.Tests
 	[TestClass]
 	public class EpamTests
 	{
-		private IWebDriver _driver;
-		private WebDriverWait _wait;
-		private EpamMainPage _epamMainPage;
-		private Actions _actions;
-		private WebDriverHelper _driverHelper;
+		private IWebDriver _driver = null!;
+		private EpamMainPage _epamMainPage = null!;
 
 		[TestInitialize]
 		public void Setup()
 		{
-			var isHeadlessMode = Environment.GetEnvironmentVariable("setting") == "headless";
-			
-			_driver = DriverInstance.GetInstance(isHeadlessMode);
-
-			_wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-			{
-				PollingInterval = TimeSpan.FromSeconds(0.25),
-				Message = "Element not found."
-			};
-
-			_actions = new Actions(_driver);
-			_driverHelper = new WebDriverHelper(_driver, _wait, _actions);
-			_epamMainPage = new EpamMainPage(_driver, _wait, _actions, _driverHelper);
+			_driver = DriverInstance.GetInstance();
+			_epamMainPage = new EpamMainPage(_driver);
 			_epamMainPage.OpenPage();
 			_epamMainPage.ClickCookieAcceptButton();
 		}
@@ -56,9 +39,9 @@ namespace WebDriverPractice.Tests
 		}
 
 		[TestMethod]
-		[DataRow("blockchain")]
-		[DataRow("cloud")]
-		[DataRow("automation")]
+		[DataRow("BLOCKCHAIN")]
+		[DataRow("Cloud")]
+		[DataRow("Automation")]
 		public void GlobalSearch_ProvideInput_GetProperResult(string keyword)
 		{
 			bool doAllLinksContainKeyword = false;
@@ -112,3 +95,14 @@ namespace WebDriverPractice.Tests
 		}
 	}
 }
+
+
+/// TODO list:
+
+//The only object to send to Page's constructor is IWebDriver instance. Refactor the framework in the next way:
+
+//Change constructor of pages to obtain only IWebDriver
+
+//Make WebDriverHelper class static, rename it to IWebDriverExtensions and make all methods as extensions to IWebDriver(https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) and you 'll have the IwebDriver instance inside the page object and just use it to call for extensions.
+
+//Using DriverInstance.GetInstance you can initialize driver inside the Page objects - in that way you will not need to create instances of Helper , WebDriver, Wait, Actions inside the PO but not in test, cause if you make it all in tests it will produce a duplication of code, and if we cover it in one place (BasePage) the code will not be duplicated

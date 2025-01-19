@@ -6,8 +6,10 @@ namespace WebDriverPractice.Driver
 {
 	public static class DriverInstance
 	{
-		public static IWebDriver GetInstance(bool isHeadlessModeOn = false)
+		public static IWebDriver GetInstance()
 		{
+			var isHeadlessModeOn = Environment.GetEnvironmentVariable("setting") == "headless";
+
 			var chromeOptions = new ChromeOptions();
 
 			if (isHeadlessModeOn)
