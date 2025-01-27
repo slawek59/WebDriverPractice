@@ -23,7 +23,7 @@ namespace WebDriverPractice.Driver
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
 
 
-			var driver = new ChromeDriver(DataConstants.ChromeDriverDirectory, chromeOptions);
+			var driver = new ChromeDriver(chromeOptions);
 
 			if (!isHeadlessModeOn)
 			{
