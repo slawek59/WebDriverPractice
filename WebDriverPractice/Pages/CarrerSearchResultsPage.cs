@@ -6,40 +6,31 @@ using WebDriverPractice.Helpers;
 
 namespace WebDriverPractice.Pages
 {
-	public class CarrerSearchResultsPage
+	public class CarrerSearchResultsPage : BasePage
 	{
-		private readonly IWebDriver _driver;
-		private readonly WebDriverWait _wait;
-		private readonly Actions _actions;
-		private readonly WebDriverHelper _driverHelper;
-
 		private readonly By _sortLegend = By.XPath("//div[@class='search-result__sorting-menu']");
 		private readonly By _sortByDate = By.XPath("//input[@id='sort-time']");
 		private readonly By _latestViewAndApplyButton = By.XPath("//ul[@class='search-result__list']/li[1]//a[contains(text(), 'View and apply')]");
 
-		public CarrerSearchResultsPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
+		public CarrerSearchResultsPage(IWebDriver driver) : base(driver)
 		{
 			Log.Information($"Open {this.GetType().Name} page.");
-			_driver = driver;
-			_wait = wait;
-			_actions = actions;
-			_driverHelper = driverHelper;
 		}
 
 		public JobDetailsPage NavigateToLatestResult()
 		{
 			Log.Information($"Scroll to {nameof(_sortLegend)}.");
-			_driverHelper.ScrollToElement(_sortLegend);
+			Driver.ScrollToElement(_sortLegend);
 
-			var date = _driverHelper.FindElementWithWait(_sortByDate);
+			var date = Driver.FindElementWithWait(_sortByDate);
 
 			Log.Information($"Click {nameof(date)}.");
-			_driverHelper.ClickWithJS(date);
+			Driver.ClickWithJS(date);
 
 			Log.Information($"Click {nameof(_latestViewAndApplyButton)}.");
-			_driverHelper.Click(_latestViewAndApplyButton);
+			Driver.Click(_latestViewAndApplyButton);
 
-			return new JobDetailsPage(_driver, _wait, _actions, _driverHelper);
+			return new JobDetailsPage(base.Driver);
 		}
 	}
 }

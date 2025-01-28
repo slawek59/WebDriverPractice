@@ -7,8 +7,10 @@ namespace WebDriverPractice.Driver
 {
 	public static class DriverInstance
 	{
-		public static IWebDriver GetInstance(bool isHeadlessModeOn = false)
+		public static IWebDriver GetInstance()
 		{
+			var isHeadlessModeOn = Environment.GetEnvironmentVariable("setting") == "headless";
+
 			var chromeOptions = new ChromeOptions();
 
 			if (isHeadlessModeOn)
@@ -23,7 +25,7 @@ namespace WebDriverPractice.Driver
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
 
 			Log.Information("Initialize driver.");
-			var driver = new ChromeDriver(DataConstants.ChromeDriverDirectory, chromeOptions);
+			var driver = new ChromeDriver(chromeOptions);
 
 			if (!isHeadlessModeOn)
 			{

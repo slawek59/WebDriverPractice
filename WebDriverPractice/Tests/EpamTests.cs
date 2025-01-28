@@ -5,20 +5,17 @@ using OpenQA.Selenium.Support.UI;
 using Serilog;
 using WebDriverPractice.Data;
 using WebDriverPractice.Driver;
-using WebDriverPractice.Helpers;
 using WebDriverPractice.Pages;
 using Log = Serilog.Log;
+using WebDriverPractice.Helpers;
 
 namespace WebDriverPractice.Tests
 {
 	[TestClass]
 	public class EpamTests
 	{
-		private IWebDriver _driver;
-		private WebDriverWait _wait;
-		private EpamMainPage _epamMainPage;
-		private Actions _actions;
-		private WebDriverHelper _driverHelper;
+		private IWebDriver _driver = null!;
+		private EpamMainPage _epamMainPage = null!;
 
 		public TestContext TestContext { get; set; }
 
@@ -41,18 +38,8 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			var isHeadlessMode = Environment.GetEnvironmentVariable("setting") == "headless";
-
-			_driver = DriverInstance.GetInstance(isHeadlessMode);
-
-			_wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-			{
-				PollingInterval = TimeSpan.FromSeconds(0.25),
-				Message = "Element not found."
-			};
-			_actions = new Actions(_driver);
-			_driverHelper = new WebDriverHelper(_driver, _wait, _actions);
-			_epamMainPage = new EpamMainPage(_driver, _wait, _actions, _driverHelper);
+			_driver = DriverInstance.GetInstance();
+			_epamMainPage = new EpamMainPage(_driver);
 			_epamMainPage.OpenPage();
 			_epamMainPage.ClickCookieAcceptButton();
 
@@ -79,7 +66,7 @@ namespace WebDriverPractice.Tests
 		}
 
 		[TestMethod]
-		[DataRow("BLOCKCHAIN")] 
+		[DataRow("BLOCKCHAIN")]
 		[DataRow("Cloud")]
 		[DataRow("Automation")]
 		public void GlobalSearch_ProvideInput_GetProperResult(string keyword)
@@ -163,26 +150,3 @@ namespace WebDriverPractice.Tests
 		}
 	}
 }
-///TODO headless dla career cos nie dziala, chyba problem z button
-
-/// TODO TAF
-//The solution should be split into next layers:
-
-//Core layer(core functionality of TAF, that aren’t project specific).
-
-//Business layer(should contain all functionality, related with business logic of the tested application.
-
-//Tests layer (should contain automated tests, TAF configuration).
-
-//Initialization of WebDriver instance should be done with helping Factory design pattern (consider adding dedicated class for Browser Factory functionality)
-
-//	All repeating actions, that should be done from test to test, should be aggregated in an abstract base class (actions such as initialization and closing a browser and so on).
-
-//Logging should be implemented (NLog, log4net or Serilog). Each test should generate logs from what should be clear test actions. TAF should support logging to both, file and console, and opportunity to use different logging levels (Error, Info, etc.). Min log level should be configurable via TAF configuration. When the test fails, a screenshot with the date and time should be taken. 
-
-
-//Tasks #1-#4:
-//Refactor automated tests created in previous module to follow SOLID, DRY, KISS, YAGNI principles, use Design Patterns (Singleton and Browser Factory) and add logging mechanism.  Solution should have Layers in Architecture and be able to execute on several environments.
-
-
-///TODO logging and screenshot date and time format to check

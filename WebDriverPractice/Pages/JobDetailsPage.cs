@@ -6,26 +6,18 @@ using WebDriverPractice.Helpers;
 
 namespace WebDriverPractice.Pages
 {
-	public class JobDetailsPage
+	public class JobDetailsPage : BasePage
     {
-		private readonly IWebDriver _driver;
-		private readonly WebDriverWait _wait;
-		private readonly Actions _actions;
-		private readonly WebDriverHelper _driverHelper;
 		private readonly By _finalContent = By.XPath("//div[@class='section__wrapper']");
 
-		public JobDetailsPage(IWebDriver driver, WebDriverWait wait, Actions actions, WebDriverHelper driverHelper)
-		{
-			Log.Information($"Open {this.GetType().Name} page.");
-			_driver = driver;
-			_wait = wait;
-			_actions = actions;
-			_driverHelper = driverHelper;
-		}
-
-		public bool IsSearchResultDisplayed(string keys)
+        public JobDetailsPage(IWebDriver driver) : base(driver)
         {
-			return _driverHelper.FindElementWithWait(_finalContent).Text.Contains($"{keys}", StringComparison.OrdinalIgnoreCase);
+			Log.Information($"Open {this.GetType().Name} page.");
+        }
+
+        public bool IsSearchResultDisplayed(string keys)
+        {
+			return Driver.FindElementWithWait(_finalContent).Text.Contains($"{keys}", StringComparison.OrdinalIgnoreCase);
 		}
 	}
 }
