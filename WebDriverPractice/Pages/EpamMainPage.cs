@@ -28,7 +28,7 @@ namespace WebDriverPractice.Pages
 			Log.Information($"Click {nameof(_magnifierButton)}.");
 			Driver.Click(_magnifierButton);
 
-			Log.Information($"Send '{keyword}' to {_inputField}.");
+			Log.Information($"Send '{keyword}' to {nameof(_inputField)}.");
 			Driver.SendKeys(_inputField, keyword);
 
 			Log.Information($"Click {nameof(_findButton)}.");
