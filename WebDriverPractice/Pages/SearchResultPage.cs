@@ -20,17 +20,7 @@ namespace WebDriverPractice.Pages
 			IList<IWebElement> searchResultsContainer = Driver.FindElementsWithWait(_searchResultContainer);
 			_wait.Until(driver => searchResultsContainer.All(element => element.Displayed));
 
-			var doesAllResultsContainKeyword = searchResultsContainer.All(item => item.Text.Contains(keyword));
-
-			if (!doesAllResultsContainKeyword)
-			{
-				var elementWithoutKeyword = searchResultsContainer
-					.FirstOrDefault(item => !item.Text.Contains(keyword));
-
-				Driver.ScrollToElement(elementWithoutKeyword);
-			}
-
-			return doesAllResultsContainKeyword;
+			return searchResultsContainer.All(item => item.Text.Contains(keyword));
 		}
 	}
 }
