@@ -3,11 +3,12 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Serilog;
-using WebDriverPractice.Data;
 using WebDriverPractice.Driver;
 using WebDriverPractice.Pages;
 using Log = Serilog.Log;
 using WebDriverPractice.Helpers;
+using WebDriverPractice.Business.Pages;
+using WebDriverPractice.Business.Data;
 
 namespace WebDriverPractice.Tests
 {

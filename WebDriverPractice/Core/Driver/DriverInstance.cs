@@ -1,9 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using WebDriverPractice.Data;
 using Serilog;
+using WebDriverPractice.Business.Data;
 
-namespace WebDriverPractice.Driver
+namespace WebDriverPractice.Core.Driver
 {
 	public static class DriverInstance
 	{

@@ -1,10 +1,11 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using WebDriverPractice.Helpers;
 using Serilog;
+using WebDriverPractice.Business;
+using WebDriverPractice.Core.Helpers;
 
-namespace WebDriverPractice.Pages
+namespace WebDriverPractice.Business.Pages
 {
 	public class AboutPage : BasePage
 	{
@@ -15,17 +16,17 @@ namespace WebDriverPractice.Pages
 
 		public AboutPage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {this.GetType().Name} page.");
+			Log.Information($"Open {GetType().Name} page.");
 		}
 
 		public bool ClickDownloadButtonAndWaitUntilDone()
 		{
 			Log.Information($"Scroll to {nameof(_section)}.");
 			Driver.ScrollToElement(_section);
-			
+
 			Log.Information($"Click {nameof(_downloadButton)}.");
 			Driver.Click(_downloadButton);
-			
+
 			return _wait.Until(driver => File.Exists(DownloadFilePath));
 		}
 	}

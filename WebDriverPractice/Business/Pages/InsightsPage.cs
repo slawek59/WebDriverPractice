@@ -2,9 +2,10 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Serilog;
-using WebDriverPractice.Helpers;
+using WebDriverPractice.Business;
+using WebDriverPractice.Core.Helpers;
 
-namespace WebDriverPractice.Pages
+namespace WebDriverPractice.Business.Pages
 {
 	public class InsightsPage : BasePage
 	{
@@ -14,7 +15,7 @@ namespace WebDriverPractice.Pages
 
 		public InsightsPage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {this.GetType().Name} page.");
+			Log.Information($"Open {GetType().Name} page.");
 		}
 
 		public void ClickSliderButton(int clickTimes)
@@ -32,7 +33,7 @@ namespace WebDriverPractice.Pages
 			Log.Information($"Click {nameof(_readMoreButton)}.");
 			Driver.ClickWithJS(Driver.FindElementWithWait(_readMoreButton));
 
-			return new InsightsReadMorePage(base.Driver);
+			return new InsightsReadMorePage(Driver);
 		}
 	}
 }

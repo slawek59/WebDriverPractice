@@ -1,4 +1,4 @@
-﻿namespace WebDriverPractice.Data
+﻿namespace WebDriverPractice.Business.Data
 {
 	public static class DataConstants
 	{

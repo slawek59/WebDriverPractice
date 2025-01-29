@@ -2,9 +2,10 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Serilog;
-using WebDriverPractice.Helpers;
+using WebDriverPractice.Business;
+using WebDriverPractice.Core.Helpers;
 
-namespace WebDriverPractice.Pages
+namespace WebDriverPractice.Business.Pages
 {
 	public class CarrerSearchResultsPage : BasePage
 	{
@@ -14,7 +15,7 @@ namespace WebDriverPractice.Pages
 
 		public CarrerSearchResultsPage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {this.GetType().Name} page.");
+			Log.Information($"Open {GetType().Name} page.");
 		}
 
 		public JobDetailsPage NavigateToLatestResult()
@@ -30,7 +31,7 @@ namespace WebDriverPractice.Pages
 			Log.Information($"Click {nameof(_latestViewAndApplyButton)}.");
 			Driver.Click(_latestViewAndApplyButton);
 
-			return new JobDetailsPage(base.Driver);
+			return new JobDetailsPage(Driver);
 		}
 	}
 }

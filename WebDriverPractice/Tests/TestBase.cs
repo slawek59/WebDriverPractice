@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using Serilog;
-using WebDriverPractice.Data;
-using WebDriverPractice.Driver;
-using WebDriverPractice.Pages;
+using WebDriverPractice.Business.Pages;
+using WebDriverPractice.Core.Driver;
+using WebDriverPractice.Core.Helpers;
 using Log = Serilog.Log;
-using WebDriverPractice.Helpers;
 
 namespace WebDriverPractice.Tests
 {

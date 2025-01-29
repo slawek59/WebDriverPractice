@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using WebDriverPractice.Driver;
 
-namespace WebDriverPractice
+namespace WebDriverPractice.Business
 {
 	public abstract class BasePage
 	{

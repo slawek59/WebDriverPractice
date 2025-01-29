@@ -1,9 +1,10 @@
 ﻿using OpenQA.Selenium;
-using WebDriverPractice.Data;
 using Serilog;
-using WebDriverPractice.Helpers;
+using WebDriverPractice.Business;
+using WebDriverPractice.Core.Helpers;
+using WebDriverPractice.Business.Data;
 
-namespace WebDriverPractice.Pages
+namespace WebDriverPractice.Business.Pages
 {
 	public class EpamMainPage : BasePage
 	{
@@ -18,7 +19,7 @@ namespace WebDriverPractice.Pages
 
 		public EpamMainPage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {this.GetType().Name} page.");
+			Log.Information($"Open {GetType().Name} page.");
 		}
 
 		public void OpenPage() => Driver.Navigate().GoToUrl(DataConstants.BaseURL);
@@ -34,7 +35,7 @@ namespace WebDriverPractice.Pages
 			Log.Information($"Click {nameof(_findButton)}.");
 			Driver.Click(_findButton);
 
-			return new SearchResultPage(base.Driver);
+			return new SearchResultPage(Driver);
 		}
 
 		public void ClickCookieAcceptButton() => Driver.Click(_cookieAcceptButton);
@@ -42,7 +43,7 @@ namespace WebDriverPractice.Pages
 		{
 			Log.Information($"Click {nameof(_careersButton)}.");
 			Driver.Click(_careersButton);
-			return new CarrerSearchPage(base.Driver);
+			return new CarrerSearchPage(Driver);
 		}
 
 		public AboutPage ClickAboutButton()
@@ -50,7 +51,7 @@ namespace WebDriverPractice.Pages
 			Log.Information($"Click {nameof(_aboutButton)}.");
 			Driver.Click(_aboutButton);
 
-			return new AboutPage(base.Driver);
+			return new AboutPage(Driver);
 		}
 
 		public InsightsPage ClickInsightsButton()
@@ -58,7 +59,7 @@ namespace WebDriverPractice.Pages
 			Log.Information($"Click {nameof(_insightsButton)}.");
 			Driver.Click(_insightsButton);
 
-			return new InsightsPage(base.Driver);
+			return new InsightsPage(Driver);
 		}
 	}
 }

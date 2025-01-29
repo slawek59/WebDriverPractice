@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace WebDriverPractice.Helpers
+namespace WebDriverPractice.Core.Helpers
 {
 	public static class ScreenshotMaker
 	{

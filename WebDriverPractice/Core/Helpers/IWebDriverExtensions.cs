@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
-namespace WebDriverPractice.Helpers
+namespace WebDriverPractice.Core.Helpers
 {
 	public static class IWebDriverExtensions
 	{

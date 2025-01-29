@@ -2,9 +2,10 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Serilog;
-using WebDriverPractice.Helpers;
+using WebDriverPractice.Business;
+using WebDriverPractice.Core.Helpers;
 
-namespace WebDriverPractice.Pages
+namespace WebDriverPractice.Business.Pages
 {
 	public class InsightsReadMorePage : BasePage
 	{
@@ -12,7 +13,7 @@ namespace WebDriverPractice.Pages
 
 		public InsightsReadMorePage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {this.GetType().Name} page.");
+			Log.Information($"Open {GetType().Name} page.");
 		}
 
 		public string GetReadMorePageTitle() => Driver.FindElementWithWait(_readMorePageTitle).Text.Trim();
