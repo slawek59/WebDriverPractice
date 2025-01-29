@@ -12,13 +12,8 @@ using WebDriverPractice.Helpers;
 namespace WebDriverPractice.Tests
 {
 	[TestClass]
-	public class EpamTests
+	public class EpamTests : TestBase
 	{
-		private IWebDriver _driver = null!;
-		private EpamMainPage _epamMainPage = null!;
-
-		public TestContext TestContext { get; set; }
-
 		//assemblyinitialize?
 
 		[AssemblyInitialize]
@@ -34,18 +29,6 @@ namespace WebDriverPractice.Tests
 			Log.Information("Assembly initialization.\n");
 		}
 
-
-		[TestInitialize]
-		public void Setup()
-		{
-			_driver = DriverInstance.GetInstance();
-			_epamMainPage = new EpamMainPage(_driver);
-			_epamMainPage.OpenPage();
-			_epamMainPage.ClickCookieAcceptButton();
-
-			Log.Information($"Test initialization for {TestContext.TestName}.");
-		}
-
 		[TestMethod]
 		[DataRow("JavaScript")]
 		public void CareerSearch_ProvideKeyword_GetProperResult(string testData)
@@ -54,7 +37,7 @@ namespace WebDriverPractice.Tests
 
 			bool isSearchResultDisplayed = false;
 
-			var carrerSearchPage = _epamMainPage.ClickCareersButton();
+			var carrerSearchPage = EpamMainPage.ClickCareersButton();
 
 			var carrerSearchResultsPage = carrerSearchPage.PerfromCarrerSearchOperations(testData);
 
@@ -75,7 +58,7 @@ namespace WebDriverPractice.Tests
 			/// TODO case insensitive????
 			bool doAllLinksContainKeyword = false;
 			/// TODO sth wrong in pom
-			var searchResultPage = _epamMainPage.SearchForKeyword(keyword);
+			var searchResultPage = EpamMainPage.SearchForKeyword(keyword);
 
 			doAllLinksContainKeyword = searchResultPage.DoAllLinksContainKeyword(keyword);
 
@@ -88,7 +71,7 @@ namespace WebDriverPractice.Tests
 		{
 			Log.Information($"{TestContext.TestName} test method starts and checking for '{fileName}' download.");
 			
-			var aboutPage = _epamMainPage.ClickAboutButton();
+			var aboutPage = EpamMainPage.ClickAboutButton();
 
 			var doesFileExist = aboutPage.ClickDownloadButtonAndWaitUntilDone();
 
@@ -108,7 +91,7 @@ namespace WebDriverPractice.Tests
 		{
 			Log.Information($"{TestContext.TestName} test method starts. Number of swipes: {clickTimes}.");
 
-			var insightsPage = _epamMainPage.ClickInsightsButton();
+			var insightsPage = EpamMainPage.ClickInsightsButton();
 			
 			insightsPage.ClickSliderButton(clickTimes);
 
@@ -119,26 +102,6 @@ namespace WebDriverPractice.Tests
 			var insightsReadMorePageTitle = insightsReadMorePage.GetReadMorePageTitle();
 
 			Assert.AreEqual(slideText, insightsReadMorePageTitle, "Texts are not equal.");
-		}
-
-		[TestCleanup]
-		public void Cleanup()
-		{
-			///TODO this stuff as non-specific should probably be also placed into a separate place
-
-			if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
-			{
-				Log.Error($"\n!---{TestContext.TestName} FAILED.---!\n");
-				var screenshotDriver = (ITakesScreenshot)_driver;
-				ScreenshotMaker.TakeBrowserScreenshot(screenshotDriver);
-			}
-			else if (TestContext.CurrentTestOutcome == UnitTestOutcome.Passed)
-			{
-				Log.Information($"{TestContext.TestName} PASSED.");
-			}
-
-			Log.Information($"Closing WebDriver.\n");
-			_driver.Quit();
 		}
 
 		[AssemblyCleanup]
