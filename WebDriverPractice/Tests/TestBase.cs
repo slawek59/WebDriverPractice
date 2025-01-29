@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using WebDriverPractice.Business.Pages;
-using WebDriverPractice.Core.Driver;
+using WebDriverPractice.Core.Browser;
 using WebDriverPractice.Core.Helpers;
 using Log = Serilog.Log;
 
@@ -18,7 +18,7 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			Driver = DriverInstance.GetInstance();
+			Driver = BrowserFactory.CreateBrowser("chrome");
 			EpamMainPage = new EpamMainPage(Driver);
 			EpamMainPage.OpenPage();
 			EpamMainPage.ClickCookieAcceptButton();
