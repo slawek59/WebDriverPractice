@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using Serilog;
 using WebDriverPractice.Business.Data;
+using WebDriverPractice.Core.Browser;
 
 namespace WebDriverPractice.Core.Driver
 {
@@ -25,7 +26,9 @@ namespace WebDriverPractice.Core.Driver
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
 
 			Log.Information("Initialize driver.");
-			var driver = new ChromeDriver(chromeOptions);
+			//var driver = new ChromeDriver(chromeOptions);
+
+			var driver = BrowserFactory.CreateBrowser("chrome");
 
 			if (!isHeadlessModeOn)
 			{

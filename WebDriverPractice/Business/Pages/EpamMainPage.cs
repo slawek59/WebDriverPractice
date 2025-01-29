@@ -1,8 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Serilog;
-using WebDriverPractice.Business;
-using WebDriverPractice.Core.Helpers;
 using WebDriverPractice.Business.Data;
+using WebDriverPractice.Core.Helpers;
 
 namespace WebDriverPractice.Business.Pages
 {

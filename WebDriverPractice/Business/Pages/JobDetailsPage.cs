@@ -1,8 +1,5 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 using Serilog;
-using WebDriverPractice.Business;
 using WebDriverPractice.Core.Helpers;
 
 namespace WebDriverPractice.Business.Pages
