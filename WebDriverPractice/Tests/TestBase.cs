@@ -9,8 +9,8 @@ namespace WebDriverPractice.Tests
 {
 	public abstract class TestBase
 	{
-		public IWebDriver Driver = null!;
-		public EpamMainPage EpamMainPage = null!;
+		public IWebDriver Driver;
+		public EpamMainPage EpamMainPage;
 
 		public TestContext TestContext { get; set; }
 
@@ -18,7 +18,7 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			Driver = BrowserFactory.CreateBrowser("chrome");
+			Driver = DriverManager.GetDriver();
 			EpamMainPage = new EpamMainPage(Driver);
 			EpamMainPage.OpenPage();
 			EpamMainPage.ClickCookieAcceptButton();
@@ -29,8 +29,6 @@ namespace WebDriverPractice.Tests
 		[TestCleanup]
 		public void Cleanup()
 		{
-			///TODO this stuff as non-specific should probably be also placed into a separate place
-
 			if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
 			{
 				Log.Error($"\n!---{TestContext.TestName} FAILED.---!\n");
@@ -43,7 +41,7 @@ namespace WebDriverPractice.Tests
 			}
 
 			Log.Information($"Closing WebDriver.\n");
-			Driver.Quit();
+			DriverManager.QuitDriver();
 		}
 	}
 }

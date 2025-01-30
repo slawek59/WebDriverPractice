@@ -3,14 +3,16 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using WebDriverPractice.Business.Data;
 using Serilog;
+using WebDriverPractice.Core.Config;
 
 namespace WebDriverPractice.Core.Browser
 {
 	public static class BrowserFactory
 	{
-		public static IWebDriver CreateBrowser(string browser)
+		public static IWebDriver CreateBrowser()
 		{
-			var isHeadlessModeOn = Environment.GetEnvironmentVariable("setting")?.ToLower() == "headless";
+			string browser = ConfigManager.GetSetting("BrowserSettings:Browser").ToLower();
+			var isHeadlessModeOn = ConfigManager.GetBoolSetting("BrowserSettings:Headless");
 
 			switch (browser)
 			{
@@ -34,7 +36,7 @@ namespace WebDriverPractice.Core.Browser
 				options.AddArgument("--window-size=1920,1080");
 			}
 
-			options.AddUserProfilePreference("download.default_directory", DataConstants.DownloadDirectory);
+			options.AddUserProfilePreference("download.default_directory", ConfigManager.GetSetting("BrowserSettings:DownloadDirectory"));
 			options.AddUserProfilePreference("download.prompt_for_download", false);
 			options.AddUserProfilePreference("disable-popup-blocking", "true");
 
@@ -61,7 +63,7 @@ namespace WebDriverPractice.Core.Browser
 				options.AddArgument("--window-size=1920,1080");
 			}
 
-			options.AddUserProfilePreference("download.default_directory", DataConstants.DownloadDirectory);
+			options.AddUserProfilePreference("download.default_directory", ConfigManager.GetSetting("BrowserSettings:DownloadDirectory"));
 			options.AddUserProfilePreference("download.prompt_for_download", false);
 			options.AddUserProfilePreference("disable-popup-blocking", "true");
 

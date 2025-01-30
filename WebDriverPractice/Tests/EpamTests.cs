@@ -2,12 +2,20 @@
 using Serilog;
 using WebDriverPractice.Business.Data;
 using WebDriverPractice.Business.Pages;
+using WebDriverPractice.Core.Logging;
 
 namespace WebDriverPractice.Tests
 {
 	[TestClass]
 	public class EpamTests : TestBase
 	{
+		[AssemblyInitialize]
+		public static void AssemblyInitialize(TestContext context)
+		{
+			LogManager.Initialize();
+			Log.Information("Global test setup started.");
+		}
+
 		[TestMethod]
 		[DataRow("JavaScript")]
 		public void CareerSearch_ProvideKeyword_GetProperResult(string testData)
@@ -34,7 +42,7 @@ namespace WebDriverPractice.Tests
 		public void GlobalSearch_ProvideInput_GetProperResult(string keyword)
 		{
 			Log.Information($"{TestContext.TestName} test method starts with '{keyword}' keyword.");
-			/// TODO case insensitive????
+			
 			bool doAllLinksContainKeyword = false;
 			/// TODO sth wrong in pom
 			var searchResultPage = EpamMainPage.SearchForKeyword(keyword);
@@ -86,9 +94,8 @@ namespace WebDriverPractice.Tests
 		[AssemblyCleanup]
 		public static void AssemblyCleanup()
 		{
-			Log.Information($"Assembly Cleanup.");
-
-			Log.CloseAndFlush();
+			Log.Information("Assembly cleanup.");
+			LogManager.Close();
 		}
 	}
 }
