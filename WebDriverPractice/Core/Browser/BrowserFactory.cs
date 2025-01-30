@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using WebDriverPractice.Business.Data;
-using Log = Serilog.Log;
+using Serilog;
 
 namespace WebDriverPractice.Core.Browser
 {

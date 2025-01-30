@@ -2,28 +2,12 @@
 using Serilog;
 using WebDriverPractice.Business.Data;
 using WebDriverPractice.Business.Pages;
-using Log = Serilog.Log;
 
 namespace WebDriverPractice.Tests
 {
 	[TestClass]
 	public class EpamTests : TestBase
 	{
-		//assemblyinitialize?
-
-		[AssemblyInitialize]
-		public static void AssemblyInitialize(TestContext testContext)
-		{
-			var now = DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss-fff");
-			///TODO into separate class (path setting as well)
-			Log.Logger = new LoggerConfiguration()
-				.WriteTo.Console()
-				.WriteTo.File(Path.Combine(Environment.CurrentDirectory, $"Logs_{now}.txt"))
-				.CreateLogger();
-
-			Log.Information("Assembly initialization.\n");
-		}
-
 		[TestMethod]
 		[DataRow("JavaScript")]
 		public void CareerSearch_ProvideKeyword_GetProperResult(string testData)
