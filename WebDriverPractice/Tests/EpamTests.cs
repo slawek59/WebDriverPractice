@@ -99,3 +99,7 @@ namespace WebDriverPractice.Tests
 		}
 	}
 }
+
+
+/// TODO add much more logs! and logging levels
+/// 

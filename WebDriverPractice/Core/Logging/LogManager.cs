@@ -1,4 +1,6 @@
 ﻿using Serilog;
+using Serilog.Events;
+using WebDriverPractice.Core.Config;
 
 namespace WebDriverPractice.Core.Logging
 {
@@ -10,10 +12,17 @@ namespace WebDriverPractice.Core.Logging
 		{
 			if (_isInitialized) return;
 
-			var now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff");
-			var logFilePath = Path.Combine(Environment.CurrentDirectory, $"Logs_{now}.txt");
+			string logLevelConfig = ConfigManager.GetSetting("Logging:LogLevel");
+
+			var logDirectory = "Logs";
+			Directory.CreateDirectory(logDirectory);
+			var logFilePath = Path.Combine(logDirectory, $"log_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log");
+
+
+			LogEventLevel logLevel = Enum.TryParse(logLevelConfig, true, out LogEventLevel parsedLogLevel) ? parsedLogLevel : LogEventLevel.Information;
 
 			Log.Logger = new LoggerConfiguration()
+				.MinimumLevel.Is(logLevel)
 				.WriteTo.Console()
 				.WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day)
 				.CreateLogger();
