@@ -12,11 +12,11 @@ namespace WebDriverPractice.Core.Logging
 		{
 			if (_isInitialized) return;
 
-			string logLevelConfig = ConfigManager.GetSetting("Logging:LogLevel");
+			string logLevelConfig = ConfigManager.GetSetting("Logging:LogLevel:Default");
 
 			var logDirectory = "Logs";
 			Directory.CreateDirectory(logDirectory);
-			var logFilePath = Path.Combine(logDirectory, $"log_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log");
+			var logFilePath = Path.Combine(logDirectory, $"log_.txt");
 
 			LogEventLevel logLevel = Enum.TryParse(logLevelConfig, true, out LogEventLevel parsedLogLevel) ? parsedLogLevel : LogEventLevel.Information;
 
