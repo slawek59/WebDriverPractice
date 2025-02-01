@@ -9,10 +9,10 @@ namespace WebDriverPractice.Tests
 {
 	public abstract class TestBase
 	{
-		public IWebDriver Driver;
-		public EpamMainPage EpamMainPage;
+		public IWebDriver Driver = null!;
+		public EpamMainPage EpamMainPage = null!;
 
-		public TestContext TestContext { get; set; }
+		public TestContext TestContext { get; set; } = null!;
 
 
 		[TestInitialize]

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Serilog;
 
 namespace WebDriverPractice.Core.Browser
 {
@@ -18,6 +19,7 @@ namespace WebDriverPractice.Core.Browser
 
 		public static void QuitDriver()
 		{
+			Log.Information("Quit Driver");
 			_driver?.Quit();
 			_driver = null;
 		}

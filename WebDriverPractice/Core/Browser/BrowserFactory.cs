@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
-using WebDriverPractice.Business.Data;
 using Serilog;
 using WebDriverPractice.Core.Config;
 

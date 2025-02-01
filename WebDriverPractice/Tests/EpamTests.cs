@@ -44,7 +44,7 @@ namespace WebDriverPractice.Tests
 			Log.Information($"{TestContext.TestName} test method starts with '{keyword}' keyword.");
 			
 			bool doAllLinksContainKeyword = false;
-			/// TODO sth wrong in pom
+			
 			var searchResultPage = EpamMainPage.SearchForKeyword(keyword);
 
 			doAllLinksContainKeyword = searchResultPage.DoAllLinksContainKeyword(keyword);
@@ -99,7 +99,3 @@ namespace WebDriverPractice.Tests
 		}
 	}
 }
-
-
-/// TODO add much more logs! and logging levels
-/// 
