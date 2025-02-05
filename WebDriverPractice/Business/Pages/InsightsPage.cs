@@ -12,7 +12,7 @@ namespace WebDriverPractice.Business.Pages
 
 		public InsightsPage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {GetType().Name} page.");
+			Log.Information($"Create instance of {GetType().Name} page.");
 		}
 
 		public void ClickSliderButton(int clickTimes)

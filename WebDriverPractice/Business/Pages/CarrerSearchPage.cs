@@ -14,7 +14,7 @@ namespace WebDriverPractice.Business.Pages
 
 		public CarrerSearchPage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {GetType().Name} page.");
+			Log.Information($"Create instance of {GetType().Name} page.");
 		}
 
 		public CarrerSearchResultsPage PerfromCarrerSearchOperations(string keys)

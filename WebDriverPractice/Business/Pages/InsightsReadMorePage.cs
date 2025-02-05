@@ -10,7 +10,7 @@ namespace WebDriverPractice.Business.Pages
 
 		public InsightsReadMorePage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {GetType().Name} page.");
+			Log.Information($"Create instance of {GetType().Name} page.");
 		}
 
 		public string GetReadMorePageTitle() => Driver.FindElementWithWait(_readMorePageTitle).Text.Trim();

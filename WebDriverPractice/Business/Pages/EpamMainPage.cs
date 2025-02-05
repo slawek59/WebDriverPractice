@@ -20,7 +20,7 @@ namespace WebDriverPractice.Business.Pages
 
 		public EpamMainPage(IWebDriver driver) : base(driver)
 		{
-			Log.Information($"Open {GetType().Name} page.");
+			Log.Information($"Create instance of {GetType().Name} page.");
 		}
 
 		public void OpenPage() => Driver.Navigate().GoToUrl(_baseUrl);
