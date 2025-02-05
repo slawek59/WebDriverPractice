@@ -2,20 +2,12 @@
 using Serilog;
 using WebDriverPractice.Business.Data;
 using WebDriverPractice.Business.Pages;
-using WebDriverPractice.Core.Logging;
 
 namespace WebDriverPractice.Tests
 {
 	[TestClass]
 	public class EpamTests : TestBase
 	{
-		[AssemblyInitialize]
-		public static void AssemblyInitialize(TestContext context)
-		{
-			LogManager.Initialize();
-			Log.Information("Global test setup started.");
-		}
-
 		[TestMethod]
 		[DataRow("JavaScript")]
 		public void CareerSearch_ProvideKeyword_GetProperResult(string testData)
@@ -89,13 +81,6 @@ namespace WebDriverPractice.Tests
 			var insightsReadMorePageTitle = insightsReadMorePage.GetReadMorePageTitle();
 
 			Assert.AreEqual(slideText, insightsReadMorePageTitle, "Texts are not equal.");
-		}
-
-		[AssemblyCleanup]
-		public static void AssemblyCleanup()
-		{
-			Log.Information("Assembly cleanup.");
-			LogManager.Close();
 		}
 	}
 }
