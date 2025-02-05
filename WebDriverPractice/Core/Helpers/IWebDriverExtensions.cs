@@ -8,6 +8,11 @@ namespace WebDriverPractice.Core.Helpers
 	{
 		public static void Click(this IWebDriver driver, By locator)
 		{
+			driver.WaitForElement(locator).Click();
+		}
+
+		public static void ClickWithWait(this IWebDriver driver, By locator)
+		{
 			Actions _actions = new Actions(driver);
 
 			var webElement = driver.WaitForElement(locator);
@@ -21,17 +26,7 @@ namespace WebDriverPractice.Core.Helpers
 
 		public static void SendKeys(this IWebDriver driver, By locator, string keys)
 		{
-			Actions _actions = new Actions(driver);
-
-			var webElement = driver.WaitForElement(locator);
-
-			_actions
-				.MoveToElement(webElement)
-				.Pause(TimeSpan.FromSeconds(1))
-				.Click(webElement)
-				.SendKeys(keys)
-				.Pause(TimeSpan.FromSeconds(1))
-				.Perform();
+			driver.WaitForElement(locator).SendKeys(keys);
 		}
 
 		public static IWebElement FindElementWithWait(this IWebDriver driver, By locator)

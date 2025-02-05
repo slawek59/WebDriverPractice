@@ -20,7 +20,7 @@ namespace WebDriverPractice.Business.Pages
 		public CarrerSearchResultsPage PerfromCarrerSearchOperations(string keys)
 		{
 			Log.Information($"Click {nameof(_remoteOptionCheckbox)}.");
-			Driver.Click(_remoteOptionCheckbox);
+			Driver.ClickWithJS(Driver.FindElement(_remoteOptionCheckbox));
 
 			Log.Information($"Send '{keys}' to {nameof(_keywordsInputField)}.");
 			Driver.SendKeys(_keywordsInputField, keys);

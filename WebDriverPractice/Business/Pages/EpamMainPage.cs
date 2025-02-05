@@ -28,18 +28,18 @@ namespace WebDriverPractice.Business.Pages
 		public SearchResultPage SearchForKeyword(string keyword)
 		{
 			Log.Information($"Click {nameof(_magnifierButton)}.");
-			Driver.Click(_magnifierButton);
+			Driver.ClickWithWait(_magnifierButton);
 
 			Log.Information($"Send '{keyword}' to {nameof(_inputField)}.");
 			Driver.SendKeys(_inputField, keyword);
 
 			Log.Information($"Click {nameof(_findButton)}.");
-			Driver.Click(_findButton);
+			Driver.ClickWithWait(_findButton);
 
 			return new SearchResultPage(Driver);
 		}
 
-		public void ClickCookieAcceptButton() => Driver.Click(_cookieAcceptButton);
+		public void ClickCookieAcceptButton() => Driver.ClickWithWait(_cookieAcceptButton);
 		public CarrerSearchPage ClickCareersButton()
 		{
 			Log.Information($"Click {nameof(_careersButton)}.");

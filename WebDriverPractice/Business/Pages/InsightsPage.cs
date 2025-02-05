@@ -20,7 +20,7 @@ namespace WebDriverPractice.Business.Pages
 			for (int i = 0; i < clickTimes; i++)
 			{
 				Log.Information($"Click {nameof(_sliderButton)}.");
-				Driver.Click(_sliderButton);
+				Driver.ClickWithWait(_sliderButton);
 			}
 		}
 
