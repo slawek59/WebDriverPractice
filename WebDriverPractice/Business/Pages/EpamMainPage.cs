@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Serilog;
 using WebDriverPractice.Business.Data;
+using WebDriverPractice.Core.Config;
 using WebDriverPractice.Core.Helpers;
 
 namespace WebDriverPractice.Business.Pages
@@ -8,6 +9,7 @@ namespace WebDriverPractice.Business.Pages
 	public class EpamMainPage : BasePage
 	{
 		private readonly By _cookieAcceptButton = By.Id("onetrust-accept-btn-handler");
+		private readonly string _baseUrl = ConfigManager.GetSetting("BrowserSettings:URL");
 
 		private readonly By _careersButton = By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/careers']");
 		private readonly By _magnifierButton = By.XPath("//button[@class='header-search__button header__icon']");
@@ -21,7 +23,7 @@ namespace WebDriverPractice.Business.Pages
 			Log.Information($"Open {GetType().Name} page.");
 		}
 
-		public void OpenPage() => Driver.Navigate().GoToUrl(DataConstants.BaseURL);
+		public void OpenPage() => Driver.Navigate().GoToUrl(_baseUrl);
 
 		public SearchResultPage SearchForKeyword(string keyword)
 		{
