@@ -18,6 +18,10 @@ namespace WebDriverPractice.Business.Pages
 		private readonly By _aboutButton = By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/about']");
 		private readonly By _insightsButton = By.LinkText("Insights");
 
+		private readonly By _servicesButton = By.XPath("//span/a[contains(@class, 'top-navigation__item-link js-op') and @href='/services']");
+		private readonly By _responsibleAIButton = By.LinkText("Responsible AI");
+		private readonly By _generativeAIButton = By.LinkText("Generative AI");
+
 		public EpamMainPage(IWebDriver driver) : base(driver)
 		{
 			Log.Information($"Create instance of {GetType().Name} page.");
@@ -61,6 +65,30 @@ namespace WebDriverPractice.Business.Pages
 			Driver.Click(_insightsButton);
 
 			return new InsightsPage(Driver);
+		}
+
+		public void NavigateToService(string category)
+		{
+			Driver.HoverOver(_servicesButton);
+
+			if (category == "Responsible AI")
+			{
+				Driver.Click(_responsibleAIButton);
+			}
+			else if (category == "Generative AI")
+			{
+				Driver.Click(_generativeAIButton);
+			}
+		}
+
+		public string? GetPageTitle()
+		{
+			return Driver.Title;
+		}
+
+		public bool IsSectionDisplayed(string section)
+		{
+			return Driver.FindElementsWithWait(By.XPath($"//h2[contains(text(), '{section}')]")).Count > 0;
 		}
 	}
 }

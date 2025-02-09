@@ -24,6 +24,15 @@ namespace WebDriverPractice.Core.Helpers
 				.Perform();
 		}
 
+		public static void HoverOver(this IWebDriver driver, By locator)
+		{
+			Actions _actions = new Actions(driver);
+
+			var webElement = driver.WaitForElement(locator);
+
+			_actions.MoveToElement(webElement).Perform();
+		}
+
 		public static void SendKeys(this IWebDriver driver, By locator, string keys)
 		{
 			driver.WaitForElement(locator).SendKeys(keys);

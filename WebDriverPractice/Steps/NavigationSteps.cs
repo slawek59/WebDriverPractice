@@ -41,7 +41,7 @@ namespace WebDriverPractice.Steps
 		[Then(@"the section ""(.*)"" should be displayed")]
 		public void ThenTheSectionShouldBeDisplayed(string section)
 		{
-			bool isDisplayed = _epamMainPage.IsRelatedExpertiseSectionDisplayed();
+			bool isDisplayed = _epamMainPage.IsSectionDisplayed(section);
 			Assert.IsTrue(isDisplayed, $"{section} is not displayed.");
 		}
 	}
