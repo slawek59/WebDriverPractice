@@ -98,11 +98,11 @@ namespace WebDriverPractice.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Provide keyword and get a proper search result")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CareerSearch")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("JavaScript", "", null)]
-        public async System.Threading.Tasks.Task ProvideKeywordAndGetAProperSearchResult(string keyword, string notUsed6248, string[] exampleTags)
+        public async System.Threading.Tasks.Task ProvideKeywordAndGetAProperSearchResult(string careerKeyword, string notUsed6248, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("Keyword", keyword);
+            argumentsOfScenario.Add("CareerKeyword", careerKeyword);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Provide keyword and get a proper search result", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
@@ -118,7 +118,7 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.GivenAsync("the user is on the Epam homepage", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 5
- await testRunner.WhenAsync(string.Format("the user searches for \"{0}\"", keyword), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync(string.Format("the user searches for \"{0}\" career keyword", careerKeyword), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 6
  await testRunner.ThenAsync("the Career Search should contain the Keyword.", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

@@ -11,7 +11,7 @@ namespace WebDriverPractice.Steps
 	{
 		private readonly IWebDriver _driver;
 		private readonly EpamMainPage _epamMainPage;
-		private CareerSearchPage _careerSearchPage;
+		private CareerSearchPage _careerSearchPage = null!;
 		private bool _isSearchResultDisplayed;
 
 		public CareerSearchSteps()
@@ -26,14 +26,14 @@ namespace WebDriverPractice.Steps
 			_careerSearchPage = _epamMainPage.ClickCareersButton();
 		}
 
-		[When(@"the user searches for ""(.*)""")]
-		public void WhenTheUserSelectsFromTheServicesDropdown(string keyword)
+		[When(@"the user searches for ""(.*)"" career keyword")]
+		public void WhenTheUserSearchesFor(string careerKeyword)
 		{
-			var carrerSearchResultsPage = _careerSearchPage.PerfromCarrerSearchOperations(keyword);
+			var carrerSearchResultsPage = _careerSearchPage.PerfromCarrerSearchOperations(careerKeyword);
 
 			var jobDetailsPage = carrerSearchResultsPage.NavigateToLatestResult();
 
-			_isSearchResultDisplayed = jobDetailsPage.IsSearchResultDisplayed(keyword);
+			_isSearchResultDisplayed = jobDetailsPage.IsSearchResultDisplayed(careerKeyword);
 		}
 
 		[Then(@"the Career Search should contain the Keyword.")]

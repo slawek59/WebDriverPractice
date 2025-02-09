@@ -18,12 +18,11 @@ namespace WebDriverPractice.Steps
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 
-		//[Given(@"the user is on the Epam homepage")]
-		//public void GivenTheUserIsOnTheEpamHomepage()
-		//{
-		//	_epamMainPage.OpenPage();
-		//	_epamMainPage.ClickCookieAcceptButton();
-		//}
+		[Given(@"the user is on the main Epam page")]
+		public void GivenTheUserIsOnTheEpamHomepage()
+		{
+			//
+		}
 
 		[When(@"the user selects ""(.*)"" from the Services dropdown")]
 		public void WhenTheUserSelectsFromTheServicesDropdown(string category)

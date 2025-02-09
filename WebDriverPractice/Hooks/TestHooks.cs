@@ -1,4 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Reqnroll;
 using Serilog;
@@ -12,7 +11,7 @@ namespace WebDriverPractice.Hooks
 	[Binding]
 	public sealed class TestHooks
 	{
-
+		///TODO wtf what with this driver and drivers everywhere
 		public IWebDriver Driver = null!;
 		public EpamMainPage EpamMainPage = null!;
 		private readonly ScenarioContext _scenarioContext;

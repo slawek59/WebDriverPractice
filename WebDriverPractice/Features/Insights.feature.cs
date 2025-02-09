@@ -20,7 +20,7 @@ namespace WebDriverPractice.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class NavigationFeature
+    public partial class InsightsFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
@@ -29,9 +29,9 @@ namespace WebDriverPractice.Features
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Navigation", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Insights", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "Navigation.feature"
+#line 1 "Insights.feature"
 #line hidden
         
         public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
@@ -95,17 +95,13 @@ namespace WebDriverPractice.Features
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate Navigation to Services Section")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Navigation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Generative AI", "Generative AI", null)]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Responsible AI", "Responsible AI", null)]
-        public async System.Threading.Tasks.Task ValidateNavigationToServicesSection(string category, string expectedTitle, string[] exampleTags)
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("InsightsSliderVerification")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Insights")]
+        public async System.Threading.Tasks.Task InsightsSliderVerification()
         {
-            string[] tagsOfScenario = exampleTags;
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("Category", category);
-            argumentsOfScenario.Add("ExpectedTitle", expectedTitle);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Validate Navigation to Services Section", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("InsightsSliderVerification", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -117,16 +113,19 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 4
- await testRunner.GivenAsync("the user is on the main Epam page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync("the user visits the Epam website", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 5
- await testRunner.WhenAsync(string.Format("the user selects \"{0}\" from the Services dropdown", category), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync("the user clicks on the Insights button", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 6
- await testRunner.ThenAsync(string.Format("the page title should be \"{0}\"", expectedTitle), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.AndAsync("the user clicks slider button two times", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 7
- await testRunner.AndAsync("the section \"Our Related Expertise\" should be displayed", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("the user clicks \'Read More\' button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 8
+ await testRunner.ThenAsync("the user sees a proper header", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
