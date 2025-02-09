@@ -1,0 +1,48 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using Reqnroll;
+using WebDriverPractice.Business.Pages;
+using WebDriverPractice.Core.Browser;
+
+namespace WebDriverPractice.Steps
+{
+	[Binding]
+	public class NavigationSteps
+	{
+		private readonly IWebDriver _driver;
+		private readonly EpamMainPage _epamMainPage;
+
+		public NavigationSteps()
+		{
+			_driver = DriverManager.GetDriver();
+			_epamMainPage = new EpamMainPage(_driver);
+		}
+
+		[Given(@"the user is on the Epam homepage")]
+		public void GivenTheUserIsOnTheEpamHomepage()
+		{
+			_epamMainPage.OpenPage();
+			_epamMainPage.ClickCookieAcceptButton();
+		}
+
+		[When(@"the user selects ""(.*)"" from the Services dropdown")]
+		public void WhenTheUserSelectsFromTheServicesDropdown(string category)
+		{
+			_epamMainPage.NavigateToService(category);
+		}
+
+		[Then(@"the page title should be ""(.*)""")]
+		public void ThenThePageTitleShouldBe(string expectedTitle)
+		{
+			var actualTitle = _epamMainPage.GetPageTitle();
+			Assert.AreEqual(expectedTitle, actualTitle, "Page titles do not match.");
+		}
+
+		[Then(@"the section ""(.*)"" should be displayed")]
+		public void ThenTheSectionShouldBeDisplayed(string section)
+		{
+			bool isDisplayed = _epamMainPage.IsRelatedExpertiseSectionDisplayed();
+			Assert.IsTrue(isDisplayed, $"{section} is not displayed.");
+		}
+	}
+}
