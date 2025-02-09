@@ -4,13 +4,13 @@ using WebDriverPractice.Core.Helpers;
 
 namespace WebDriverPractice.Business.Pages
 {
-	public class CarrerSearchResultsPage : BasePage
+	public class CareerSearchResultsPage : BasePage
 	{
 		private readonly By _sortLegend = By.XPath("//div[@class='search-result__sorting-menu']");
 		private readonly By _sortByDate = By.XPath("//input[@id='sort-time']");
 		private readonly By _latestViewAndApplyButton = By.XPath("//ul[@class='search-result__list']/li[1]//a[contains(text(), 'View and apply')]");
 
-		public CarrerSearchResultsPage(IWebDriver driver) : base(driver)
+		public CareerSearchResultsPage(IWebDriver driver) : base(driver)
 		{
 			Log.Information($"Create instance of {GetType().Name} page.");
 		}

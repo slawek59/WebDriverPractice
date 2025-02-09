@@ -44,11 +44,11 @@ namespace WebDriverPractice.Business.Pages
 		}
 
 		public void ClickCookieAcceptButton() => Driver.ClickWithWait(_cookieAcceptButton);
-		public CarrerSearchPage ClickCareersButton()
+		public CareerSearchPage ClickCareersButton()
 		{
 			Log.Information($"Click {nameof(_careersButton)}.");
 			Driver.Click(_careersButton);
-			return new CarrerSearchPage(Driver);
+			return new CareerSearchPage(Driver);
 		}
 
 		public AboutPage ClickAboutButton()

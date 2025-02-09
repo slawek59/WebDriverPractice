@@ -33,9 +33,9 @@ namespace WebDriverPractice.Hooks
 		public void BeforeScenario()
 		{
 			Driver = DriverManager.GetDriver();
-			//EpamMainPage = new EpamMainPage(Driver);
-			//EpamMainPage.OpenPage();
-			//EpamMainPage.ClickCookieAcceptButton();
+			EpamMainPage = new EpamMainPage(Driver);
+			EpamMainPage.OpenPage();
+			EpamMainPage.ClickCookieAcceptButton();
 
 			Log.Information($"Test initialization for {_scenarioContext.ScenarioInfo.Title}.");
 		}
