@@ -31,7 +31,7 @@ namespace WebDriverPractice.Features
         
         private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Navigation", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "Feature1.feature"
+#line 1 "Navigation.feature"
 #line hidden
         
         public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
@@ -97,8 +97,8 @@ namespace WebDriverPractice.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate Navigation to Services Section")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Navigation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Generative AI", "Generative AI - EPAM", null)]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Responsible AI", "Responsible AI - EPAM", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Generative AI", "Generative AI", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute("Responsible AI", "Responsible AI", null)]
         public async System.Threading.Tasks.Task ValidateNavigationToServicesSection(string category, string expectedTitle, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;

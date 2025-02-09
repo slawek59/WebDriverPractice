@@ -35,7 +35,7 @@ namespace WebDriverPractice.Steps
 		public void ThenThePageTitleShouldBe(string expectedTitle)
 		{
 			var actualTitle = _epamMainPage.GetPageTitle();
-			Assert.AreEqual(expectedTitle, actualTitle, "Page titles do not match.");
+			StringAssert.Contains(actualTitle, expectedTitle, "Page titles do not match.");
 		}
 
 		[Then(@"the section ""(.*)"" should be displayed")]

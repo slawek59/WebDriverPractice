@@ -18,6 +18,11 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
+			if (TestContext == null)
+			{
+				return;
+			}
+
 			Driver = DriverManager.GetDriver();
 			EpamMainPage = new EpamMainPage(Driver);
 			EpamMainPage.OpenPage();
@@ -29,6 +34,11 @@ namespace WebDriverPractice.Tests
 		[TestCleanup]
 		public void Cleanup()
 		{
+			if (TestContext == null)
+			{
+				return;
+			}
+
 			if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
 			{
 				Log.Error($"\n!---{TestContext.TestName} FAILED.---!\n");

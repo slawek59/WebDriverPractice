@@ -88,7 +88,7 @@ namespace WebDriverPractice.Business.Pages
 
 		public bool IsSectionDisplayed(string section)
 		{
-			return Driver.FindElementsWithWait(By.XPath($"//h2[contains(text(), '{section}')]")).Count > 0;
+			return Driver.FindElementsWithWait(By.XPath($"//span[contains(text(), '{section}')]")).Count > 0;
 		}
 	}
 }

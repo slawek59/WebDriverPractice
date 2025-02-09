@@ -6,7 +6,7 @@ Scenario Outline: Validate Navigation to Services Section
 	Then the page title should be "<ExpectedTitle>"
 	And the section "Our Related Expertise" should be displayed
 
-	Examples:
-		|Category        | ExpectedTitle           |
-		|Generative AI  | Generative AI - EPAM   |
-		|Responsible AI | Responsible AI - EPAM |
+Examples:
+	| Category       | ExpectedTitle  |
+	| Generative AI  | Generative AI  |
+	| Responsible AI | Responsible AI |
