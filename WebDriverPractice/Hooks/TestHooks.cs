@@ -11,7 +11,6 @@ namespace WebDriverPractice.Hooks
 	[Binding]
 	public sealed class TestHooks
 	{
-		///TODO wtf what with this driver and drivers everywhere
 		public IWebDriver Driver = null!;
 		public EpamMainPage EpamMainPage = null!;
 		private readonly ScenarioContext _scenarioContext;
@@ -35,6 +34,8 @@ namespace WebDriverPractice.Hooks
 			EpamMainPage = new EpamMainPage(Driver);
 			EpamMainPage.OpenPage();
 			EpamMainPage.ClickCookieAcceptButton();
+
+			_scenarioContext["WebDriver"] = Driver;
 
 			Log.Information($"Test initialization for {_scenarioContext.ScenarioInfo.Title}.");
 		}

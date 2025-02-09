@@ -14,9 +14,9 @@ namespace WebDriverPractice.Steps
 		private CareerSearchPage _careerSearchPage = null!;
 		private bool _isSearchResultDisplayed;
 
-		public CareerSearchSteps()
+		public CareerSearchSteps(ScenarioContext scenarioContext)
 		{
-			_driver = DriverManager.GetDriver();
+			_driver = (IWebDriver)scenarioContext["WebDriver"];
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 

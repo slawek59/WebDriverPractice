@@ -14,9 +14,9 @@ namespace WebDriverPractice.Steps
 		private readonly EpamMainPage _epamMainPage;
 		private  SearchResultPage _searchResultPage = null!;
 
-		public GlobalSearchSteps()
+		public GlobalSearchSteps(ScenarioContext scenarioContext)
 		{
-			_driver = DriverManager.GetDriver();
+			_driver = (IWebDriver)scenarioContext["WebDriver"];
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 

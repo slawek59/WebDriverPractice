@@ -14,9 +14,9 @@ namespace WebDriverPractice.Steps
 		private AboutPage _aboutPage = null!;
 		private bool _doesFileExist;
 
-		public DownloadSteps()
+		public DownloadSteps(ScenarioContext scenarioContext)
 		{
-			_driver = DriverManager.GetDriver();
+			_driver = (IWebDriver)scenarioContext["WebDriver"];
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 

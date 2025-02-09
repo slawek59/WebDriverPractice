@@ -12,9 +12,9 @@ namespace WebDriverPractice.Steps
 		private readonly IWebDriver _driver;
 		private readonly EpamMainPage _epamMainPage;
 
-		public NavigationSteps()
+		public NavigationSteps(ScenarioContext scenarioContext)
 		{
-			_driver = DriverManager.GetDriver();
+			_driver = (IWebDriver)scenarioContext["WebDriver"];
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 

@@ -15,9 +15,9 @@ namespace WebDriverPractice.Steps
 		private InsightsReadMorePage _insightsReadMorePage = null!;
 		private string? _slideText;
 
-		public InsightsSteps()
+		public InsightsSteps(ScenarioContext scenarioContext)
 		{
-			_driver = DriverManager.GetDriver();
+			_driver = (IWebDriver)scenarioContext["WebDriver"];
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 
