@@ -21,7 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Business\Models\" />
 	  <Folder Include="Business\Builders\" />
 	</ItemGroup>
 
