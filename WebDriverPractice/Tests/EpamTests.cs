@@ -35,11 +35,9 @@ namespace WebDriverPractice.Tests
 		{
 			Log.Information($"{TestContext.TestName} test method starts with '{keyword}' keyword.");
 			
-			bool doAllLinksContainKeyword = false;
-			
 			var searchResultPage = EpamMainPage.SearchForKeyword(keyword);
 
-			doAllLinksContainKeyword = searchResultPage.DoAllLinksContainKeyword(keyword);
+			var doAllLinksContainKeyword = searchResultPage.DoAllLinksContainKeyword(keyword);
 
 			Assert.IsTrue(doAllLinksContainKeyword, $"All links do not contain the searched keyword, which is {keyword}");
 		}
