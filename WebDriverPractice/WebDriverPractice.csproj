@@ -20,8 +20,4 @@
 		<PackageReference Include="WebDriverManager" Version="2.17.5" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Business\Builders\" />
-	</ItemGroup>
-
 </Project>
