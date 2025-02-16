@@ -6,7 +6,7 @@ using WebDriverPractice.Core.Browser;
 using WebDriverPractice.Core.Helpers;
 using WebDriverPractice.Core.Logging;
 
-namespace WebDriverPractice.Hooks
+namespace WebDriverPractice.Tests.Hooks
 {
 	[Binding]
 	public sealed class TestHooks

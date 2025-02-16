@@ -1,11 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using Reqnroll;
-using Serilog;
 using WebDriverPractice.Business.Pages;
-using WebDriverPractice.Core.Browser;
 
-namespace WebDriverPractice.Steps
+namespace WebDriverPractice.Tests.Steps
 {
 	[Binding]
 	public class GlobalSearchSteps
