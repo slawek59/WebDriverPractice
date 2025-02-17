@@ -27,7 +27,7 @@ namespace WebDriverPractice.Tests.Steps
 		}
 
 		[When(@"the user clicks slider button two times")]
-		public void WhenTheUserClicksOnDownloadButton()
+		public void WhenTheUserClicksSliderButtonTwoTimes()
 		{
 			_insightsPage.ClickSliderButton(2);
 		}

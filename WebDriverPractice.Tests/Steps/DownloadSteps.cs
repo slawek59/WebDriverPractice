@@ -19,14 +19,14 @@ namespace WebDriverPractice.Tests.Steps
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 
-		[When(@"the user clicks on About button")]
-		public void WhenTheUserClicksOnAboutButton()
+		[When(@"the user clicks the About button")]
+		public void WhenTheUserClicksTheAboutButton()
 		{
 			_aboutPage = _epamMainPage.ClickAboutButton();
 		}
 
 		[When(@"the user clicks the Download button")]
-		public void WhenTheUserClicksOnDownloadButton()
+		public void WhenTheUserClicksTheDownloadButton()
 		{
 			_doesFileExist = _aboutPage.ClickDownloadButtonAndWaitUntilDone();
 		}

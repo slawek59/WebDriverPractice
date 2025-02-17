@@ -28,39 +28,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Features\CareerSearch.feature.cs">
-			<Visible>true</Visible>
-			<DependentUpon>%(Filename)</DependentUpon>
-			<DesignTime>true</DesignTime>
-			<AutoGen>true</AutoGen>
-		</Compile>
-		<Compile Update="Features\Download.feature.cs">
-			<Visible>true</Visible>
-			<DependentUpon>%(Filename)</DependentUpon>
-			<DesignTime>true</DesignTime>
-			<AutoGen>true</AutoGen>
-		</Compile>
-		<Compile Update="Features\GlobalSearch.feature.cs">
-			<Visible>true</Visible>
-			<DependentUpon>%(Filename)</DependentUpon>
-			<DesignTime>true</DesignTime>
-			<AutoGen>true</AutoGen>
-		</Compile>
-		<Compile Update="Features\Insights.feature.cs">
-			<Visible>true</Visible>
-			<DependentUpon>%(Filename)</DependentUpon>
-			<DesignTime>true</DesignTime>
-			<AutoGen>true</AutoGen>
-		</Compile>
-		<Compile Update="Features\Navigation.feature.cs">
-			<Visible>true</Visible>
-			<DependentUpon>%(Filename)</DependentUpon>
-			<DesignTime>true</DesignTime>
-			<AutoGen>true</AutoGen>
-		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
