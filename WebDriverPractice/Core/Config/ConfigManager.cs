@@ -36,7 +36,7 @@ namespace WebDriverPractice.Core.Config
 
 		//	return configFilePath;
 		//}
-
+		
 		private static string GetConfigDirectory()
 		{
 			Log.Information("Getting configuration file path.");
