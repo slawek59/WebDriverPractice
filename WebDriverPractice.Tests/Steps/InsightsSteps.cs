@@ -20,12 +20,6 @@ namespace WebDriverPractice.Tests.Steps
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 
-		[Given(@"the user visits the Epam website")]
-		public void GivenTheUserVisitsTheEpamWebsite()
-		{
-			//
-		}
-
 		[When(@"the user clicks on the Insights button")]
 		public void WhenTheUserClicksOnInsightsButton()
 		{

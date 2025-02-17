@@ -19,12 +19,6 @@ namespace WebDriverPractice.Tests.Steps
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 
-		[Given(@"the user is on the Epam website")]
-		public void GivenTheUserInOnTheEpamWebsite()
-		{
-			//
-		}
-
 		[When(@"the user clicks on About button")]
 		public void WhenTheUserClicksOnAboutButton()
 		{

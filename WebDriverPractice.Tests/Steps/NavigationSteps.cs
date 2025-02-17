@@ -17,12 +17,6 @@ namespace WebDriverPractice.Tests.Steps
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 
-		[Given(@"the user is on the main Epam page")]
-		public void GivenTheUserIsOnTheEpamHomepage()
-		{
-			//
-		}
-
 		[When(@"the user selects ""(.*)"" from the Services dropdown")]
 		public void WhenTheUserSelectsFromTheServicesDropdown(string category)
 		{

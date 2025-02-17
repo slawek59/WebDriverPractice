@@ -18,12 +18,6 @@ namespace WebDriverPractice.Tests.Steps
 			_epamMainPage = new EpamMainPage(_driver);
 		}
 
-		[Given(@"the user is on the Epam page")]
-		public static void GivenTheUserIsOnTheEpamHomepage()
-		{
-			//
-		}
-
 		[When(@"the user searches for ""(.*)"" keyword")]
 		public void WhenTheUserSearchesFor(string keyword)
 		{
