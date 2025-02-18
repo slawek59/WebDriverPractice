@@ -28,7 +28,7 @@ namespace WebDriverPractice.Tests.Steps
 		[When(@"the user searches for ""(.*)"" career keyword")]
 		public void WhenTheUserSearchesFor(string careerKeyword)
 		{
-			var carrerSearchResultsPage = _careerSearchPage.PerfromCarrerSearchOperations(careerKeyword);
+			var carrerSearchResultsPage = _careerSearchPage.PerfromCareerSearchOperations(careerKeyword);
 
 			var jobDetailsPage = carrerSearchResultsPage.NavigateToLatestResult();
 

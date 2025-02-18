@@ -17,7 +17,7 @@ namespace WebDriverPractice.Business.Pages
 			Log.Information($"Create instance of {GetType().Name} page.");
 		}
 
-		public CareerSearchResultsPage PerfromCarrerSearchOperations(string keys)
+		public CareerSearchResultsPage PerfromCareerSearchOperations(string keys)
 		{
 			Log.Information($"Click {nameof(_remoteOptionCheckbox)}.");
 			Driver.ClickWithJS(Driver.FindElement(_remoteOptionCheckbox));
