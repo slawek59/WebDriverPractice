@@ -20,7 +20,7 @@ namespace WebDriverPractice.Business.Pages
 			Log.Information($"Scroll to {nameof(_sortLegend)}.");
 			Driver.ScrollToElement(_sortLegend);
 
-			var date = Driver.FindElementWithWait(_sortByDate);
+			var date = Driver.FindElement(_sortByDate);
 
 			Log.Information($"Click {nameof(date)}.");
 			Driver.ClickWithJS(date);

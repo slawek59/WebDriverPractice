@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V130.Debugger;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
@@ -36,7 +37,8 @@ namespace WebDriverPractice.Core.Helpers
 
 		public static void SendKeys(this IWebDriver driver, By locator, string keys)
 		{
-			driver.WaitForElement(locator).SendKeys(keys);
+			//driver.WaitForElement(locator).SendKeys(keys);
+			driver.FindElement(locator).SendKeys(keys);
 		}
 
 		public static IWebElement FindElementWithWait(this IWebDriver driver, By locator)
