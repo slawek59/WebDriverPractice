@@ -9,7 +9,6 @@ namespace WebDriverPractice.Core.Helpers
 	{
 		public static void Click(this IWebDriver driver, By locator)
 		{
-			//driver.WaitForElement(locator).Click();
 			driver.FindElement(locator).Click();
 		}
 
@@ -30,14 +29,13 @@ namespace WebDriverPractice.Core.Helpers
 		{
 			Actions _actions = new Actions(driver);
 
-			var webElement = driver.WaitForElement(locator);
+			var webElement = driver.FindElement(locator);
 
 			_actions.MoveToElement(webElement).Perform();
 		}
 
 		public static void SendKeys(this IWebDriver driver, By locator, string keys)
 		{
-			//driver.WaitForElement(locator).SendKeys(keys);
 			driver.FindElement(locator).SendKeys(keys);
 		}
 
