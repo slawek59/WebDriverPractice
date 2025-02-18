@@ -8,7 +8,8 @@ namespace WebDriverPractice.Core.Helpers
 	{
 		public static void Click(this IWebDriver driver, By locator)
 		{
-			driver.WaitForElement(locator).Click();
+			//driver.WaitForElement(locator).Click();
+			driver.FindElement(locator).Click();
 		}
 
 		public static void ClickWithWait(this IWebDriver driver, By locator)
