@@ -10,12 +10,13 @@ namespace WebDriverPractice.Tests.Steps
 	{
 		private readonly IWebDriver _driver;
 		private readonly EpamMainPage _epamMainPage;
-		private  SearchResultPage _searchResultPage = null!;
+		private  SearchResultPage _searchResultPage;
 
 		public GlobalSearchSteps(ScenarioContext scenarioContext)
 		{
 			_driver = (IWebDriver)scenarioContext["WebDriver"];
 			_epamMainPage = new EpamMainPage(_driver);
+			_searchResultPage = new SearchResultPage(_driver);
 		}
 
 		[When(@"the user searches for ""(.*)"" keyword")]

@@ -10,8 +10,20 @@ namespace WebDriverPractice.Tests.Steps
 	{
 		private readonly IWebDriver _driver;
 		private readonly EpamMainPage _epamMainPage;
-		private CareerSearchPage _careerSearchPage = null!;
+		private CareerSearchPage? _careerSearchPage;
 		private bool _isSearchResultDisplayed;
+
+		private CareerSearchPage SearchPage
+		{
+			get
+			{
+				if (_careerSearchPage == null)
+				{
+					_careerSearchPage = _epamMainPage.ClickCareersButton();
+				}
+				return _careerSearchPage;
+			}
+		}
 
 		public CareerSearchSteps(ScenarioContext scenarioContext)
 		{
@@ -22,13 +34,13 @@ namespace WebDriverPractice.Tests.Steps
 		[Given(@"the user is on the Epam homepage")]
 		public void GivenTheUserIsOnTheEpamHomepage()
 		{
-			_careerSearchPage = _epamMainPage.ClickCareersButton();
+			_ = SearchPage;
 		}
 
 		[When(@"the user searches for ""(.*)"" career keyword")]
 		public void WhenTheUserSearchesFor(string careerKeyword)
 		{
-			var carrerSearchResultsPage = _careerSearchPage.PerfromCareerSearchOperations(careerKeyword);
+			var carrerSearchResultsPage = SearchPage.PerfromCareerSearchOperations(careerKeyword);
 
 			var jobDetailsPage = carrerSearchResultsPage.NavigateToLatestResult();
 

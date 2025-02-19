@@ -10,8 +10,20 @@ namespace WebDriverPractice.Tests.Steps
 	{
 		private readonly IWebDriver _driver;
 		private readonly EpamMainPage _epamMainPage;
-		private AboutPage _aboutPage = null!;
+		private AboutPage? _aboutPage;
 		private bool _doesFileExist;
+
+		private AboutPage About
+		{
+			get
+			{
+				if (_aboutPage == null)
+				{
+					_aboutPage = _epamMainPage.ClickAboutButton();
+				}
+				return _aboutPage;
+			}
+		}
 
 		public DownloadSteps(ScenarioContext scenarioContext)
 		{
@@ -22,13 +34,13 @@ namespace WebDriverPractice.Tests.Steps
 		[When(@"the user clicks the About button")]
 		public void WhenTheUserClicksTheAboutButton()
 		{
-			_aboutPage = _epamMainPage.ClickAboutButton();
+			_ = About;
 		}
 
 		[When(@"the user clicks the Download button")]
 		public void WhenTheUserClicksTheDownloadButton()
 		{
-			_doesFileExist = _aboutPage.ClickDownloadButtonAndWaitUntilDone();
+			_doesFileExist = About.ClickDownloadButtonAndWaitUntilDone();
 		}
 
 		[Then(@"the file is downloaded")]

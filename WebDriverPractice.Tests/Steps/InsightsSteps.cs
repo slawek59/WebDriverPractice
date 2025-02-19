@@ -10,9 +10,34 @@ namespace WebDriverPractice.Tests.Steps
 	{
 		private readonly IWebDriver _driver;
 		private readonly EpamMainPage _epamMainPage;
-		private InsightsPage _insightsPage = null!;
-		private InsightsReadMorePage _insightsReadMorePage = null!;
+		private InsightsPage? _insightsPage;
+		private InsightsReadMorePage? _insightsReadMorePage;
 		private string? _slideText;
+
+		private InsightsPage Insights
+		{
+			get
+			{
+				if (_insightsPage == null)
+				{
+					_insightsPage = _epamMainPage.ClickInsightsButton();
+				}
+				return _insightsPage;
+			}
+		}
+
+		private InsightsReadMorePage InsightsReadMore
+		{
+			get
+			{
+				if (_insightsReadMorePage == null)
+				{
+					_insightsReadMorePage = Insights.ClickReadMoreButton();
+				}
+				return _insightsReadMorePage;
+			}
+		}
+
 
 		public InsightsSteps(ScenarioContext scenarioContext)
 		{
@@ -23,27 +48,27 @@ namespace WebDriverPractice.Tests.Steps
 		[When(@"the user clicks on the Insights button")]
 		public void WhenTheUserClicksOnInsightsButton()
 		{
-			_insightsPage = _epamMainPage.ClickInsightsButton();
+			_ = Insights;
 		}
 
 		[When(@"the user clicks slider button two times")]
 		public void WhenTheUserClicksSliderButtonTwoTimes()
 		{
-			_insightsPage.ClickSliderButton(2);
+			Insights.ClickSliderButton(2);
 		}
 
 		[When(@"the user clicks 'Read More' button")]
 		public void WhenTheUserClicksReadMoreButton()
 		{
-			_slideText = _insightsPage.GetSlideText();
+			_slideText = Insights.GetSlideText();
 
-			_insightsReadMorePage = _insightsPage.ClickReadMoreButton();
+			_insightsReadMorePage = Insights.ClickReadMoreButton();
 		}
 
 		[Then(@"the user sees a proper header")]
 		public void ThenTheUserSeesTheProperHeader()
 		{
-			var insightsReadMorePageTitle = _insightsReadMorePage.GetReadMorePageTitle();
+			var insightsReadMorePageTitle = InsightsReadMore.GetReadMorePageTitle();
 
 			Assert.AreEqual(_slideText, insightsReadMorePageTitle, "Texts are not equal.");
 		}
