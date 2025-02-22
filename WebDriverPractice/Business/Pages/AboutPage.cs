@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
 using Serilog;
+using WebDriverPractice.Core.Config;
 using WebDriverPractice.Core.Helpers;
 
 namespace WebDriverPractice.Business.Pages
 {
 	public class AboutPage : BasePage
 	{
-		public const string DownloadFilePath = "C:\\Users\\wassl\\Downloads\\EPAM_Corporate_Overview_Q4_EOY.pdf";
-
+		public readonly string DownloadFilePath = ConfigManager.GetSetting("BrowserSettings:DownloadFile");
 		private readonly By _section = By.XPath("//span[contains(text(), 'EPAM at')]");
 		private readonly By _downloadButton = By.XPath("//span[contains(text(), 'DOWNLOAD')]/parent::span/parent::a");
 

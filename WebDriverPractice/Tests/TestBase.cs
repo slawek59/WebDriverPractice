@@ -11,7 +11,6 @@ namespace WebDriverPractice.Tests
 	{
 		public IWebDriver Driver = null!;
 		public EpamMainPage EpamMainPage = null!;
-
 		public TestContext TestContext { get; set; } = null!;
 
 

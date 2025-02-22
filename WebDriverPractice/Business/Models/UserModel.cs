@@ -2,13 +2,13 @@
 {
 	public class UserModel
 	{
-		public int Id { get; set; }
-		public string? Name { get; set; }
-		public string? Username { get; set; }
-		public string? Email { get; set; }
-		public AddressModel? Address { get; set; }
-		public string? Phone { get; set; }
-		public string? Website { get; set; }
-		public UserModel? Company { get; set; }
+		public int id { get; set; }
+		public string? name { get; set; }
+		public string? username { get; set; }
+		public string? email { get; set; }
+		public AddressModel? address { get; set; }
+		public string? phone { get; set; }
+		public string? website { get; set; }
+		public CompanyModel? company { get; set; }
 	}
 }

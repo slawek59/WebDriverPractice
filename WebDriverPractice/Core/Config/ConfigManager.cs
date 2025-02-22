@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Serilog;
+using System.Reflection;
 
 namespace WebDriverPractice.Core.Config
 {
@@ -23,9 +24,9 @@ namespace WebDriverPractice.Core.Config
 		private static string GetConfigFilePath()
 		{
 			Log.Information("Getting File Path.");
-			string basePath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.Parent!.Parent!.Parent!.FullName;
+			string assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
 			string configFileName = "appsettings.json";
-			string configFilePath = Path.Combine(basePath, configFileName);
+			string configFilePath = Path.Combine(assemblyLocation, configFileName);
 
 			return configFilePath;
 		}

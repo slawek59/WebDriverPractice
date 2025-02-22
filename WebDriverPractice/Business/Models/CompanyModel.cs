@@ -2,7 +2,7 @@
 {
 	public class CompanyModel
 	{
-		public string? Name { get; set; }
-		public string? CatchPhrase { get; set; }
+		public string? name { get; set; }
+		public string? catchPhrase { get; set; }
 	}
 }

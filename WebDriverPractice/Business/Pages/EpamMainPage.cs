@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using Serilog;
-using WebDriverPractice.Business.Data;
 using WebDriverPractice.Core.Config;
 using WebDriverPractice.Core.Helpers;
 

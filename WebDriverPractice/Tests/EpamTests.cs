@@ -45,13 +45,14 @@ namespace WebDriverPractice.Tests
 		}
 
 		[TestMethod]
-		[DataRow(AboutPage.DownloadFilePath)]
 		[TestCategory("Download")]
-		public void AboutPage_ClickDownload_Downloads(string fileName)
+		public void AboutPage_ClickDownload_Downloads()
 		{
-			Log.Information($"{TestContext.TestName} test method starts and checking for '{fileName}' download.");
+			Log.Information($"{TestContext.TestName} test method starts and checking for download.");
 			
 			var aboutPage = EpamMainPage.ClickAboutButton();
+
+			var fileName = aboutPage.DownloadFilePath;
 
 			var doesFileExist = aboutPage.ClickDownloadButtonAndWaitUntilDone();
 

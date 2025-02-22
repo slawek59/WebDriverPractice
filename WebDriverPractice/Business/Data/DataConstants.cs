@@ -1,6 +1,4 @@
-﻿using WebDriverPractice.Core.Config;
-
-namespace WebDriverPractice.Business.Data
+﻿namespace WebDriverPractice.Business.Data
 {
 	public static class DataConstants
 	{
