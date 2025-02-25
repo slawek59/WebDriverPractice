@@ -1,9 +1,6 @@
 name: CI/CD Module Pipeline
 
 on:
-  push:
-    branches:
-      - API
   pull_request:
     branches:
       - main
@@ -12,8 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build and tests
+  api_tests:
+    name: Run API tests
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -24,21 +21,48 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      - name: Install Chrome dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip xvfb libxi6 libgconf-2-4
-          sudo apt-get install -y google-chrome-stable
-          google-chrome --version
-          which google-chrome
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: .
+
+      - name: Build API tests
+        run: dotnet build --no-restore
+        working-directory: .
+
+      - name: Run API tests
+        run: dotnet test --no-build --logger trx --results-directory TestResults
+
+      - name: Save API tests results
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-tests-results
+          path: TestResults
+          
+  api_tests:
+    name: Run UI tests
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0.x"
 
       - name: Restore dependencies
         run: dotnet restore
         working-directory: .
 
-      - name: Build
+      - name: Build UI tests
         run: dotnet build --no-restore
         working-directory: .
 
-      - name: Run tests
-        run: dotnet test --no-build
+      - name: Run UI tests
+        run: dotnet test --no-build --logger trx --results-directory TestResults
+
+      - name: Save UI tests results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-tests-results
+          path: TestResults
