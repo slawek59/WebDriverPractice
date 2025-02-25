@@ -31,7 +31,10 @@ namespace WebDriverPractice.Core.Browser
 			if (isHeadlessModeOn)
 			{
 				Log.Information("Open in headless mode.");
+				options.AddArgument("--no-sandbox");
+				options.AddArgument("disable-infobars");
 				options.AddArgument("--headless");
+				options.AddArgument("--disable-dev-shm-usage");
 				options.AddArgument("--window-size=1920,1080");
 			}
 
