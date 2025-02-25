@@ -37,8 +37,8 @@ jobs:
         with:
           name: api-tests-results
           path: TestResults
-          
-  api_tests:
+
+  ui_tests:
     name: Run UI tests
     runs-on: windows-latest
     steps:
