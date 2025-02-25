@@ -18,9 +18,9 @@
 		<PackageReference Include="Selenium.WebDriver" Version="4.28.0" />
 		<PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="132.0.6834.11000" />
 		<PackageReference Include="WebDriverManager" Version="2.17.5" />
-		<None Update="appsettings.json">
+		<Content Include="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
+		</Content>
 	</ItemGroup>
 
 </Project>
