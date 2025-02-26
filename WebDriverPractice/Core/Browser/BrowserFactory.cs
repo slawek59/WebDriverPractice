@@ -10,7 +10,7 @@ namespace WebDriverPractice.Core.Browser
 	{
 		public static IWebDriver CreateBrowser()
 		{
-			string browser = ConfigManager.GetSetting("BrowserSettings:Browser").ToLower();
+			string browser = ConfigManager.GetSetting("BrowserSettings:Browser")?.ToLower() ?? "chrome";
 			var isHeadlessModeOn = ConfigManager.GetBoolSetting("BrowserSettings:Headless");
 
 			switch (browser)
@@ -32,6 +32,7 @@ namespace WebDriverPractice.Core.Browser
 			{
 				Log.Information("Open in headless mode.");
 				options.AddArgument("--no-sandbox");
+				options.AddArgument("--disable-gpu");
 				options.AddArgument("disable-infobars");
 				options.AddArgument("--headless");
 				options.AddArgument("--disable-dev-shm-usage");
@@ -61,6 +62,8 @@ namespace WebDriverPractice.Core.Browser
 			if (isHeadlessModeOn)
 			{
 				Log.Information("Open in headless mode.");
+				options.AddArgument("--no-sandbox");
+				options.AddArgument("--disable-gpu");
 				options.AddArgument("--headless=new");
 				options.AddArgument("--window-size=1920,1080");
 			}
