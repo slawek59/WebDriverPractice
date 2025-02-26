@@ -60,7 +60,7 @@ jobs:
         working-directory: .
 
       - name: Run UI tests
-        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=API
+        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI
 
       - name: Save UI tests results
         uses: actions/upload-artifact@v4
