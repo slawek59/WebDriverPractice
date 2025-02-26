@@ -10,7 +10,7 @@ namespace WebDriverPractice.Tests
 	{
 		[TestMethod]
 		[DataRow("JavaScript")]
-		[TestCategory("Career Search")]
+		[TestCategory("UI")]
 		public void CareerSearch_ProvideKeyword_GetProperResult(string testData)
 		{
 			Log.Information($"{TestContext.TestName} test method starts.");
@@ -32,7 +32,7 @@ namespace WebDriverPractice.Tests
 		[DataRow("BLOCKCHAIN")]
 		[DataRow("Cloud")]
 		[DataRow("Automation")]
-		[TestCategory("Global Search")]
+		[TestCategory("UI")]
 		public void GlobalSearch_ProvideInput_GetProperResult(string keyword)
 		{
 			Log.Information($"{TestContext.TestName} test method starts with '{keyword}' keyword.");
@@ -45,7 +45,7 @@ namespace WebDriverPractice.Tests
 		}
 
 		[TestMethod]
-		[TestCategory("Download")]
+		[TestCategory("UI")]
 		public void AboutPage_ClickDownload_Downloads()
 		{
 			Log.Information($"{TestContext.TestName} test method starts and checking for download.");
@@ -68,7 +68,7 @@ namespace WebDriverPractice.Tests
 
 		[TestMethod]
 		[DataRow(DataConstants.ClickTimes)]
-		[TestCategory("Slider")]
+		[TestCategory("UI")]
 		public void InsightsPage_ClickReadMoreButtonOnThirdSlide_ValidateArticleName(int clickTimes)
 		{
 			Log.Information($"{TestContext.TestName} test method starts. Number of swipes: {clickTimes}.");

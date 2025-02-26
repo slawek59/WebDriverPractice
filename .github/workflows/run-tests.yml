@@ -30,7 +30,7 @@ jobs:
         working-directory: .
 
       - name: Run API tests
-        run: dotnet test --no-build --logger trx --results-directory TestResults
+        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=API
 
       - name: Save API tests results
         uses: actions/upload-artifact@v4
@@ -41,6 +41,7 @@ jobs:
   ui_tests:
     name: Run UI tests
     runs-on: windows-latest
+    needs: api_tests
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -59,7 +60,7 @@ jobs:
         working-directory: .
 
       - name: Run UI tests
-        run: dotnet test --no-build --logger trx --results-directory TestResults
+        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=API
 
       - name: Save UI tests results
         uses: actions/upload-artifact@v4
