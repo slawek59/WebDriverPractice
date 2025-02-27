@@ -69,8 +69,17 @@ jobs:
         run: dotnet build --no-restore
         working-directory: .
 
+      - name: Set Browser Variable
+        run: |
+          if ([string]::IsNullOrEmpty("${{ github.event.inputs.browser }}")) {
+            echo "BROWSER=chrome" >> $env:GITHUB_ENV
+          } else {
+            echo "BROWSER=${{ github.event.inputs.browser }}" >> $env:GITHUB_ENV
+          }
+        shell: pwsh
+
       - name: Run UI tests
-        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI -- TestRunParameters.Parameter(name=Browser,value=${{ github.event.inputs.browser }})
+        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI -- TestRunParameters.Parameter(name=Browser,value="${{ env.BROWSER }}")
         continue-on-error: true
 
       - name: Save UI tests results
