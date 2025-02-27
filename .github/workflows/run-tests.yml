@@ -7,6 +7,15 @@ on:
   schedule:
     - cron: "0 4 * * *"
   workflow_dispatch:
+    inputs:
+      browse:
+        desription: "Choose browser for UI tests"
+        require: true
+        default: "chrome"
+        type: "choice"
+        options:
+          - chrome
+          - edge
 
 jobs:
   api_tests:

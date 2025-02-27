@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using Serilog;
@@ -8,9 +9,14 @@ namespace WebDriverPractice.Core.Browser
 {
 	public static class BrowserFactory
 	{
-		public static IWebDriver CreateBrowser()
+		public static IWebDriver CreateBrowser(TestContext testContext)
 		{
-			string browser = ConfigManager.GetSetting("BrowserSettings:Browser")?.ToLower() ?? "chrome";
+			string? browser = testContext.Properties["Browser"]?.ToString()?.ToLower();
+
+			if (string.IsNullOrEmpty(browser))
+			{
+				browser = ConfigManager.GetSetting("BrowserSettings:Browser")?.ToLower() ?? "chrome";
+			}
 			var isHeadlessModeOn = ConfigManager.GetBoolSetting("BrowserSettings:Headless");
 
 			switch (browser)
@@ -34,7 +40,7 @@ namespace WebDriverPractice.Core.Browser
 				options.AddArgument("--no-sandbox");
 				options.AddArgument("--disable-gpu");
 				options.AddArgument("disable-infobars");
-				options.AddArgument("--headless");
+				options.AddArgument("--headless=new");
 				options.AddArgument("--disable-dev-shm-usage");
 				options.AddArgument("--window-size=1920,1080");
 			}
