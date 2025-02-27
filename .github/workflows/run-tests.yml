@@ -70,7 +70,7 @@ jobs:
         working-directory: .
 
       - name: Run UI tests
-        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI --
+        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI
         continue-on-error: true
 
       - name: Save UI tests results
