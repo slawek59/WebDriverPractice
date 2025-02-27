@@ -1,11 +1,11 @@
 name: CI/CD Module Pipeline
 
 on:
-  pull_request:
-    branches:
-      - main
-  schedule:
-    - cron: "0 4 * * *"
+  # pull_request:
+  #   branches:
+  #     - main
+  # schedule:
+  #   - cron: "0 4 * * *"
   workflow_dispatch:
     inputs:
       browser:
