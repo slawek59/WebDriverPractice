@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using Serilog;
 
 namespace WebDriverPractice.Core.Browser
@@ -7,11 +8,11 @@ namespace WebDriverPractice.Core.Browser
 	{
 		private static IWebDriver? _driver;
 
-		public static IWebDriver GetDriver()
+		public static IWebDriver GetDriver(TestContext testContext)
 		{
 			if (_driver == null)
 			{
-				_driver = BrowserFactory.CreateBrowser();
+				_driver = BrowserFactory.CreateBrowser(testContext);
 			}
 
 			return _driver;

@@ -17,7 +17,7 @@ namespace WebDriverPractice.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			Driver = DriverManager.GetDriver();
+			Driver = DriverManager.GetDriver(TestContext);
 			EpamMainPage = new EpamMainPage(Driver);
 			EpamMainPage.OpenPage();
 			EpamMainPage.ClickCookieAcceptButton();
