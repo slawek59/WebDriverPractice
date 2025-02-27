@@ -1,11 +1,11 @@
 name: CI/CD Module Pipeline
 
 on:
-  # pull_request:
-  #   branches:
-  #     - main
-  # schedule:
-  #   - cron: "0 4 * * *"
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 4 * * *"
   workflow_dispatch:
     inputs:
       browser:
@@ -71,11 +71,7 @@ jobs:
 
       - name: Set Browser Variable
         run: |
-          if ([string]::IsNullOrEmpty("${{ github.event.inputs.browser }}")) {
-            echo "BROWSER=chrome" >> $env:GITHUB_ENV
-          } else {
-            echo "BROWSER=${{ github.event.inputs.browser }}" >> $env:GITHUB_ENV
-          }
+          echo "BROWSER=${{ github.event.inputs.browser != '' && github.event.inputs.browser || 'chrome' }}" >> $env:GITHUB_ENV
         shell: pwsh
 
       - name: Run UI tests
