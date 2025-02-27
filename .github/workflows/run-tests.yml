@@ -8,9 +8,9 @@ on:
     - cron: "0 4 * * *"
   workflow_dispatch:
     inputs:
-      browse:
-        desription: "Choose browser for UI tests"
-        require: true
+      browser:
+        description: "Choose browser for UI tests"
+        required: true
         default: "chrome"
         type: "choice"
         options:
@@ -70,7 +70,7 @@ jobs:
         working-directory: .
 
       - name: Run UI tests
-        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI
+        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI -- TestRunParameters.Parameter(name=Browser,value=${{ github.event.inputs.browser }})
         continue-on-error: true
 
       - name: Save UI tests results
