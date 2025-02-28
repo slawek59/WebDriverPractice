@@ -25,10 +25,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install WebDriver for Chrome
+        run: choco install chromedriver --version=latest
+
+      - name: Install WebDriver for Edge
+        run: choco install edgedriver --version=latest
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: "8.0.x"
+
+      - name: Restore test tools
+        run: dotnet tool restore
 
       - name: Restore dependencies
         run: dotnet restore
@@ -60,6 +69,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: "8.0.x"
+
+      - name: Restore test tools
+        run: dotnet tool restore
 
       - name: Restore dependencies
         run: dotnet restore
