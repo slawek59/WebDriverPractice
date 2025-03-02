@@ -6,8 +6,10 @@ namespace WebDriverPractice.Core.Helpers
 	{
 		public static string TakeBrowserScreenshot(ITakesScreenshot driver)
 		{
-			var now = DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss-fff");
-			var screenshotPath = Path.Combine("TestResults", $"Display_{now}.png");
+			string screenshotDirectory = Path.Combine(Directory.GetCurrentDirectory(), "TestResults");
+
+			var now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff");
+			var screenshotPath = Path.Combine(screenshotDirectory, $"Display_{now}.png");
 			driver.GetScreenshot().SaveAsFile(screenshotPath);
 
 			return screenshotPath;
