@@ -14,7 +14,7 @@ namespace WebDriverPractice.Core.Logging
 
 			string logLevelConfig = ConfigManager.GetSetting("Logging:LogLevel:Default");
 
-			string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
+			string projectRoot = Directory.GetCurrentDirectory();
 			string logDirectory = Path.Combine(projectRoot, "Logs");
 
 			if (!Directory.Exists(logDirectory))

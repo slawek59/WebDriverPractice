@@ -83,6 +83,9 @@ jobs:
         run: dotnet build --no-restore
         working-directory: .
 
+      - name: Ensure Screenshots Directory Exists
+        run: powershell -Command "New-Item -ItemType Directory -Force -Path Screenshots"
+
       - name: Run UI tests
         run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI
         continue-on-error: true
@@ -103,7 +106,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
          name: screenshots
-         path: Screenshots/
+         path: '**/Screenshots/**/*.png'
          if-no-files-found: ignore
          
       - name: Save Log Files
