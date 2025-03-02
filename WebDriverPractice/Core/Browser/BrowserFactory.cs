@@ -11,7 +11,7 @@ namespace WebDriverPractice.Core.Browser
 	{
 		public static IWebDriver CreateBrowser(TestContext testContext)
 		{
-			string? browser = testContext.Properties["Browser"]?.ToString()?.ToLower();
+			string? browser = Environment.GetEnvironmentVariable("BROWSER")?.ToLower();
 
 			if (string.IsNullOrEmpty(browser))
 			{
