@@ -14,7 +14,7 @@ namespace WebDriverPractice.Core.Logging
 
 			string logLevelConfig = ConfigManager.GetSetting("Logging:LogLevel:Default");
 
-			var logDirectory = "Logs";
+			string logDirectory = Path.Combine(Directory.GetCurrentDirectory(), "TestResults");
 			Directory.CreateDirectory(logDirectory);
 			var logFilePath = Path.Combine(logDirectory, $"log_.txt");
 
