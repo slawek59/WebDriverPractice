@@ -59,12 +59,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Install WebDriver for Chrome
-      #   run: choco install chromedriver --version=latest
-
-      # - name: Install WebDriver for Edge
-      #   run: choco install edgedriver --version=latest
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
@@ -94,7 +88,17 @@ jobs:
           path: TestResults
     
       - name: Save Screenshots
+        if: always()
         uses: actions/upload-artifact@v4
         with:
          name: ui-tests-screenshots
-         path: TestResults/*.png        
+         path: '**/TestResults/*.png'
+         if-no-files-found: ignore        
+
+      - name: Save log files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+         name: test-logs
+         path: '**/TestResults/*.txt'
+         if-no-files-found: ignore   

@@ -21,8 +21,7 @@ namespace WebDriverPractice.Core.Logging
 				Directory.CreateDirectory(logDirectory);
 			}
 
-			Directory.CreateDirectory(logDirectory);
-			var logFilePath = Path.Combine(logDirectory, $"log_.txt");
+			var logFilePath = Path.Combine(logDirectory, $"log_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt");
 
 			LogEventLevel logLevel = Enum.TryParse(logLevelConfig, true, out LogEventLevel parsedLogLevel) ? parsedLogLevel : LogEventLevel.Information;
 
