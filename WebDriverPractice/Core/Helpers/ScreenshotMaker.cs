@@ -6,7 +6,7 @@ namespace WebDriverPractice.Core.Helpers
 	{
 		public static string TakeBrowserScreenshot(ITakesScreenshot driver)
 		{
-			string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
+			string projectRoot = Directory.GetCurrentDirectory();
 			string screenshotDirectory = Path.Combine(projectRoot, "Screenshots");
 
 			if (!Directory.Exists(screenshotDirectory))

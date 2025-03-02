@@ -103,7 +103,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
          name: screenshots
-         path: '**/Screenshots/**/*.png'
+         path: Screenshots/
          if-no-files-found: ignore
          
       - name: Save Log Files
