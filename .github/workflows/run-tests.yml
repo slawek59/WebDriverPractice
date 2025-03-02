@@ -50,6 +50,14 @@ jobs:
         with:
           name: api-tests-results
           path: TestResults
+         
+      - name: Save Log Files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+         name: logs
+         path: '**/Logs/**/*.txt'
+         if-no-files-found: ignore
 
   ui_tests:
     name: Run UI tests
