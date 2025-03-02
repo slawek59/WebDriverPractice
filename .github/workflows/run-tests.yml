@@ -92,6 +92,10 @@ jobs:
         env:
            BROWSER: ${{ github.event.inputs.browser }}
 
+      - name: Debug - List Screenshot Files
+        if: always()
+        run: dir Screenshots
+
       - name: Save UI Tests Results
         if: always()
         uses: actions/upload-artifact@v4
