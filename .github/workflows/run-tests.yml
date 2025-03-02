@@ -55,7 +55,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-         name: logs
+         name: api-logs
          path: '**/Logs/**/*.txt'
          if-no-files-found: ignore
 
@@ -110,6 +110,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-         name: logs
+         name: ui-logs
          path: '**/Logs/**/*.txt'
          if-no-files-found: ignore
