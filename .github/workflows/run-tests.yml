@@ -1,0 +1,94 @@
+name: CI/CD Module Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: "Choose browser for UI tests"
+        required: true
+        default: "chrome"
+        type: "choice"
+        options:
+          - chrome
+          - edge
+
+jobs:
+  api_tests:
+    name: Run API tests
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore test tools
+        run: dotnet tool restore
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: .
+
+      - name: Build API tests
+        run: dotnet build --no-restore
+        working-directory: .
+
+      - name: Run API tests
+        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=API
+        continue-on-error: true
+
+      - name: Save API tests results
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-tests-results
+          path: TestResults
+
+  ui_tests:
+    name: Run UI tests
+    runs-on: windows-latest
+    needs: api_tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # - name: Install WebDriver for Chrome
+      #   run: choco install chromedriver --version=latest
+
+      # - name: Install WebDriver for Edge
+      #   run: choco install edgedriver --version=latest
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore test tools
+        run: dotnet tool restore
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: .
+
+      - name: Build UI tests
+        run: dotnet build --no-restore
+        working-directory: .
+
+      - name: Run UI tests
+        run: dotnet test --no-build --logger trx --results-directory TestResults --filter TestCategory=UI
+        continue-on-error: true
+        env:
+           BROWSER: ${{ github.event.inputs.browser }}
+
+      - name: Save UI tests results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-tests-results
+          path: TestResults
