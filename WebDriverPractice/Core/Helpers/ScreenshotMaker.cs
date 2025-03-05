@@ -9,23 +9,26 @@ namespace WebDriverPractice.Core.Helpers
 		{
 			string screenshotDirectory = Path.Combine(Environment.CurrentDirectory, "Screenshots");
 
-			if (!Directory.Exists(screenshotDirectory))
-			{
-				Directory.CreateDirectory(screenshotDirectory);
-				Log.Information($"Created directory: {screenshotDirectory}");
-			}
+			Directory.CreateDirectory(screenshotDirectory);
+			Log.Information($"Created directory: {screenshotDirectory}");
 
 			var now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff");
 			var screenshotPath = Path.Combine(screenshotDirectory, $"Display_{now}.png");
 
 			try
 			{
-				driver.GetScreenshot().SaveAsFile(screenshotPath);
-				Console.WriteLine($"Screenshot saved at: {screenshotPath}");
+				var screenshot = driver.GetScreenshot();
+
+				using (var fileStream = new FileStream(screenshotPath, FileMode.Create))
+				{
+					screenshot.SaveAsFile(screenshotPath);
+					Log.Information($"Screenshot saved at: {screenshotPath}");
+				}
+
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"Failed to save screenshot: {ex.Message}");
+				Log.Information($"Failed to save screenshot: {ex.Message}");
 			}
 
 			return screenshotPath;
