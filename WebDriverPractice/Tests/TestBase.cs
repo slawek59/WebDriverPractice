@@ -28,7 +28,6 @@ namespace WebDriverPractice.Tests
 		[TestCleanup]
 		public void Cleanup()
 		{
-			Log.Information($"Closing WebDriver.\n");
 			
 			if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
 			{
@@ -40,6 +39,8 @@ namespace WebDriverPractice.Tests
 			{
 				Log.Information($"{TestContext.TestName} PASSED.");
 			}
+
+			Log.Information($"Closing WebDriver.\n");
 			DriverManager.QuitDriver();
 		}
 	}
