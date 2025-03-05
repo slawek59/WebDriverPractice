@@ -15,20 +15,13 @@ namespace WebDriverPractice.Core.Helpers
 			var now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff");
 			var screenshotPath = Path.Combine(screenshotDirectory, $"Display_{now}.png");
 
-			try
-			{
-				var screenshot = driver.GetScreenshot();
+			var screenshot = driver.GetScreenshot();
 
-				using (var fileStream = new FileStream(screenshotPath, FileMode.Create))
-				{
-					screenshot.SaveAsFile(screenshotPath);
-					Log.Information($"Screenshot saved at: {screenshotPath}");
-				}
-
-			}
-			catch (Exception ex)
+			using (var fileStream = new FileStream(screenshotPath, FileMode.Create))
 			{
-				Log.Information($"Failed to save screenshot: {ex.Message}");
+				screenshot.SaveAsFile(screenshotPath);
+				fileStream.Flush();
+				Log.Information($"Screenshot saved at: {screenshotPath}");
 			}
 
 			return screenshotPath;
