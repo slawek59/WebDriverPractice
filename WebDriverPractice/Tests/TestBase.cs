@@ -31,9 +31,9 @@ namespace WebDriverPractice.Tests
 			
 			if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
 			{
-				Log.Error($"\n!---{TestContext.TestName} FAILED.---!\n");
 				var screenshotDriver = (ITakesScreenshot)Driver;
 				ScreenshotMaker.TakeBrowserScreenshot(screenshotDriver);
+				Log.Error($"\n!---{TestContext.TestName} FAILED.---!\n");
 			}
 			else if (TestContext.CurrentTestOutcome == UnitTestOutcome.Passed)
 			{
